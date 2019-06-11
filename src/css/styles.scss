@@ -1,0 +1,12 @@
+@import 'variable.scss';
+
+/* this is for global styles. selectors are not rewritten. module = false in dev config */
+
+#pew-app {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wire {
+    border: 1px solid magenta;
+}
