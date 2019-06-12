@@ -96,7 +96,7 @@ export default class Broadband extends PCTApp {
                         document.dispatchEvent(new Event('all-views-ready'));
                     }
                 });
-            } else { // env === production and window is not prerendering
+            } else {
                 this.views.forEach(view => {
                     console.log('about to init:', view);
                     view.init(this);
@@ -105,15 +105,21 @@ export default class Broadband extends PCTApp {
         });
     }
     init() {
+        var env = process.env.NODE_ENV;
         super.init();
         this.bodyEventListenerBind = this.bodyEventListenerHandler.bind(this);
         /*PS.setSubs([
             
         ]);*/
-        if (process.env.NODE_ENV !== 'development') {
+        console.log(env);
+        if (env !== 'development') {
             this.getDataAndPushViews();
+        } else {
+            this.views.forEach(view => {
+                console.log('about to init:', view);
+                view.init(this);
+            });
         }
-        console.log(this);
     }
     pushViews() {
         this.views.push(

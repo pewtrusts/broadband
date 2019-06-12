@@ -10,10 +10,11 @@ const selector = '#pew-app';
 const App = new Broadband(selector, { // extends PCTApp-js. PCTApp-js's constructor method is called, p1 contaiuner, p2 options
 	needsRouter: false
 });
+console.log('foo', process.env.NODE_ENV);
 if ( process.env.NODE_ENV === 'development' || window.IS_PRERENDERING ){ // process development means using WebPack dev server. window is prerendering means in
 	console.log('init app prerender');
     App.prerender();
 } else {
-    App.init();
     console.log('init app init');
+    App.init();
 }
