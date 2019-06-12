@@ -21,8 +21,15 @@ import PCTApp from '@App';
 
 //publishWindowResize(S);
 
-//const fieldsForMetadata = [{key:'state', parent: null}, {key:'category', parent: null}, {key:'topic', parent: 'category'}, {key:'subtopic', parent: 'topic' }];
-
+const categories = [
+    'state',
+    'programmatic',
+    'funding',
+    'definition',
+    'competition',
+    'infrastructure',
+    'other'
+];
 const model = {
 
 };
@@ -115,7 +122,36 @@ export default class Broadband extends PCTApp {
         );
     }
     nestData() {
-        this.model.nestedData = d3.nest().key(d => d.category).key(d => d.topic).key(d => d.subtopic).entries(this.model.data);
+        function sortCategories(a,b){
+            return categories.indexOf(a) - categories.indexOf(b);
+        }
+        function sortAlpha(a,b){
+            var sorted = [a,b].sort();
+            return sorted.indexOf(a) - sorted.indexOf(b);
+        }
+        function sortData(data){
+            function flatCount(datum){
+                return datum.values.reduce(function(acc,cur){
+                    return acc + cur.values.length;
+                },0);
+            }
+            data.forEach(function(d){
+                if ( d.key !== 'state' ){
+                    d.values.sort(function(a,b){
+                        return flatCount(b) - flatCount(a);
+                    });
+                }
+            });
+            return data;
+        }
+        this.model.nestedData = sortData([
+            {
+                key: 'state',
+                values: d3.nest().key(d => d.state).sortKeys(sortAlpha).entries(this.model.data)
+            },
+            ...d3.nest().key(d => d.category).sortKeys(sortCategories).key(d => d.topic).key(d => d.subtopic).entries(this.model.data)
+        ]);
+        
     }
     setMetadata(field) {
         var set = new Set(this.model.data.map(d => d[field]));
