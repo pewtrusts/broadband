@@ -1,0 +1,8 @@
+@import '@Project/css/variable.scss';
+
+.listItem {
+    display: none;
+    &.isOnPage {
+        display: block;
+    }
+}
