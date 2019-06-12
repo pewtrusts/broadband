@@ -1,11 +1,9 @@
 import Element from '@UI/element';
 import s from './styles.scss';
 import PS from 'pubsub-setter';
-import { stateModule as S } from 'stateful-dead';
+//import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
-
-const itemsPerPage = 10;
 
 export default class ListView extends Element {
 
@@ -19,9 +17,9 @@ export default class ListView extends Element {
         }
         view.classList.add('wire');
 
-        var html = this.model.data.reduce(function(acc,cur, i){
+        var html = this.model.data.reduce((acc,cur, i) => {
           var section = `
-            <div class="${s.listItem} js-page-${Math.ceil((i + 1) / itemsPerPage)} ${ i < 10 ? s.isOnPage : 'nope' }">
+            <div class="${s.listItem} js-page-${Math.ceil((i + 1) / this.data.itemsPerPage)} ${ i < 10 ? s.isOnPage : 'nope' }">
               <h2>${cur.title}</h2>
               <p><strong>State:</strong> ${cur.state}</p>
               <p><strong>Topic:</strong> ${cur.topic}</p>
@@ -37,19 +35,10 @@ export default class ListView extends Element {
     }
 
     init(){
-        console.log('init!');
+        var showPageBind = this.showPage.bind(this);
         PS.setSubs([
-            ['page', this.showPage.bind(this)]
+            ['page', showPageBind]
         ]);
-        
-        var i = 1;
-        setInterval(function(){
-            S.setState('page', i);
-            i++;
-        },2000);
-        /* to do*/
-
-        //subscribe to secondary dimension , drilldown, details
     }
     showPage(msg,data){
         document.querySelectorAll('.' + s.isOnPage).forEach(item => {
