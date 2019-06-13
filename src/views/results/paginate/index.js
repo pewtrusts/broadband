@@ -34,8 +34,15 @@ export default class Paginate extends Element {
         prev.classList.add(s.btn, s.btnPrev, 'js-paginate-button-prev');
         controls.appendChild(prev);
 
+        //go to first
+        var goToFirst = document.createElement('button');
+        goToFirst.setAttribute('type','button');
+        goToFirst.classList.add('js-paginate-button-first');
+        goToFirst.textContent = '...';
+        controls.appendChild(goToFirst);
+
         //pages
-        var max = this.pageCount < 7 ? this.pageCount : 7;
+        var max = this.pageCount;// < 7 ? this.pageCount : 7;
         for ( let i = 1; i <= max; i++ ){
             let page = document.createElement('button');
             page.classList.add('js-paginate-button-page');
@@ -49,12 +56,11 @@ export default class Paginate extends Element {
         }
 
         //go to last
-        if ( this.pageCount > 7 ){
-            let goToLast = document.createElement('button');
-            goToLast.setAttribute('type','button');
-            goToLast.textContent = '...';
-            controls.appendChild(goToLast);
-        }
+        var goToLast = document.createElement('button');
+        goToLast.setAttribute('type','button');
+        goToLast.classList.add('js-paginate-button-last');
+        goToLast.textContent = '...';
+        controls.appendChild(goToLast);
 
         //next
         var next = document.createElement('button');
@@ -67,24 +73,38 @@ export default class Paginate extends Element {
     }
     init(){
         var updateBind = this.update.bind(this);
+        this.prevButton = document.querySelector('.js-paginate-button-prev');
+        this.firstButton = document.querySelector('.js-paginate-button-first');
+        this.pageButtons = document.querySelectorAll('.js-paginate-button-page');
+        this.lastButton = document.querySelector('.js-paginate-button-last');
+        this.nextButton = document.querySelector('.js-paginate-button-next');
+        this.paginationCount = document.querySelector('.js-pagination-count');
         PS.setSubs([
             ['page', updateBind]
         ]);
         S.setState('page', 1);
         
         //page buttons
-        document.querySelectorAll('.js-paginate-button-page').forEach(button => {
+        this.pageButtons.forEach(button => {
             button.addEventListener('click', function(){
                 S.setState('page', +this.dataset.page);
             });
         });
         //prev button
-        document.querySelector('.js-paginate-button-prev').addEventListener('click', function(){
+        this.prevButton.addEventListener('click', function(){
             S.setState('page', +S.getState('page') - 1);
         });
         //next button
-        document.querySelector('.js-paginate-button-next').addEventListener('click', function(){
+        this.nextButton.addEventListener('click', function(){
             S.setState('page', +S.getState('page') + 1);
+        });
+        //go to first button
+        this.firstButton.addEventListener('click', () => {
+            S.setState('page', 1);
+        });
+        //go to last button
+        this.lastButton.addEventListener('click', () => {
+            S.setState('page', this.pageCount);
         });
     }
     update(msg,data){
@@ -95,19 +115,51 @@ export default class Paginate extends Element {
         //update results count
         var max = Math.min(this.data.itemsPerPage * data, this.model.data.length);
         var min = this.data.itemsPerPage * data - (this.data.itemsPerPage - 1);
-        document.querySelector('.js-pagination-count').textContent = `${min}–${max} of ${this.model.data.length} results`;
+        this.paginationCount.textContent = `${min}–${max} of ${this.model.data.length} results`;
 
         //toggle prev/next buttons disabled
         if ( data === 1 ){
-            document.querySelector('.js-paginate-button-prev').setAttribute('disabled', 'disabled');
+            this.prevButton.setAttribute('disabled', 'disabled');
         } else {
-            document.querySelector('.js-paginate-button-prev').removeAttribute('disabled');
+            this.prevButton.removeAttribute('disabled');
         }
+        
         if ( data === this.pageCount ){
-            document.querySelector('.js-paginate-button-next').setAttribute('disabled', 'disabled');
+            this.nextButton.setAttribute('disabled', 'disabled');
         } else {
-            document.querySelector('.js-paginate-button-next').removeAttribute('disabled');
+            this.nextButton.removeAttribute('disabled');
         }
+        //toggle presence of got first and go to last
+        this.updateFirstAndLast.call(this, data);
 
+        this.updateButtonRange.call(this, data);
+    }
+    updateButtonRange(data){
+        var start = +data < 5 ? 0 : +data > this.pageCount - 3 ? this.pageCount - 7 : +data - 4;
+        this.pageButtons.forEach(button => {
+            button.setAttribute('hidden','hidden');
+        });
+        for ( let i = start; i < start + 7; i++){
+            this.pageButtons[i].removeAttribute('hidden');
+        }
+    }
+    updateFirstAndLast(page = S.getState('page')){
+        if ( this.pageCount <= 7 ){
+            this.firstButton.setAttribute('hidden','hidden');
+            this.lastButton.setAttribute('hidden','hidden');
+            return;
+        } 
+        if ( page <= 4 ){
+            this.lastButton.removeAttribute('hidden');
+            this.firstButton.setAttribute('hidden', 'hidden');
+            return;
+        }
+        if ( page >= this.pageCount - 3 ){
+            this.firstButton.removeAttribute('hidden');
+            this.lastButton.setAttribute('hidden', 'hidden');
+            return;
+        }
+        this.firstButton.removeAttribute('hidden');
+        this.lastButton.removeAttribute('hidden');
     }
 }
