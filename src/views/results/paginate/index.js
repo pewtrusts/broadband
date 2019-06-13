@@ -107,14 +107,18 @@ export default class Paginate extends Element {
         });
     }
     update(msg,data){
+        if ( data === 0 ){
+            return;
+        }
+        this.pageCount = Math.ceil(this.model.filteredData.length / this.data.itemsPerPage);
         //handle disabled attributes
         document.querySelector('.js-paginate-button-page[disabled]').removeAttribute('disabled');
         document.querySelector(`.js-paginate-button-page[data-page="${data}"]`).setAttribute('disabled','disabled');
 
         //update results count
-        var max = Math.min(this.data.itemsPerPage * data, this.model.data.length);
+        var max = Math.min(this.data.itemsPerPage * data, this.model.filteredData.length);
         var min = this.data.itemsPerPage * data - (this.data.itemsPerPage - 1);
-        this.paginationCount.textContent = `${min}–${max} of ${this.model.data.length} results`;
+        this.paginationCount.textContent = `${min}–${max} of ${this.model.filteredData.length} results`;
 
         //toggle prev/next buttons disabled
         if ( data === 1 ){
