@@ -12,6 +12,7 @@ export default class Paginate extends Element {
          //container
         var view = super.prerender();
         this.name = 'Paginate';
+        this.pageCount = Math.ceil(this.model.data.length / this.data.itemsPerPage);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
@@ -29,12 +30,12 @@ export default class Paginate extends Element {
         //prev button
         var prev = document.createElement('button');
         prev.setAttribute('type','button');
-        prev.classList.add(s.btn, s.btnPrev);
+        prev.setAttribute('disabled','disabled');
+        prev.classList.add(s.btn, s.btnPrev, 'js-paginate-button-prev');
         controls.appendChild(prev);
 
         //pages
-        var pageCount = Math.ceil(this.model.data.length / this.data.itemsPerPage);
-        var max = pageCount < 7 ? pageCount : 7;
+        var max = this.pageCount < 7 ? this.pageCount : 7;
         for ( let i = 1; i <= max; i++ ){
             let page = document.createElement('button');
             page.classList.add('js-paginate-button-page');
@@ -48,7 +49,7 @@ export default class Paginate extends Element {
         }
 
         //go to last
-        if ( pageCount > 7 ){
+        if ( this.pageCount > 7 ){
             let goToLast = document.createElement('button');
             goToLast.setAttribute('type','button');
             goToLast.textContent = '...';
@@ -58,7 +59,7 @@ export default class Paginate extends Element {
         //next
         var next = document.createElement('button');
         next.setAttribute('type','button');
-        next.classList.add(s.btn, s.btnNext);
+        next.classList.add(s.btn, s.btnNext, 'js-paginate-button-next');
         controls.appendChild(next);
 
         view.appendChild(controls);
@@ -70,10 +71,20 @@ export default class Paginate extends Element {
             ['page', updateBind]
         ]);
         S.setState('page', 1);
+        
+        //page buttons
         document.querySelectorAll('.js-paginate-button-page').forEach(button => {
             button.addEventListener('click', function(){
                 S.setState('page', +this.dataset.page);
             });
+        });
+        //prev button
+        document.querySelector('.js-paginate-button-prev').addEventListener('click', function(){
+            S.setState('page', +S.getState('page') - 1);
+        });
+        //next button
+        document.querySelector('.js-paginate-button-next').addEventListener('click', function(){
+            S.setState('page', +S.getState('page') + 1);
         });
     }
     update(msg,data){
@@ -85,6 +96,18 @@ export default class Paginate extends Element {
         var max = Math.min(this.data.itemsPerPage * data, this.model.data.length);
         var min = this.data.itemsPerPage * data - (this.data.itemsPerPage - 1);
         document.querySelector('.js-pagination-count').textContent = `${min}–${max} of ${this.model.data.length} results`;
+
+        //toggle prev/next buttons disabled
+        if ( data === 1 ){
+            document.querySelector('.js-paginate-button-prev').setAttribute('disabled', 'disabled');
+        } else {
+            document.querySelector('.js-paginate-button-prev').removeAttribute('disabled');
+        }
+        if ( data === this.pageCount ){
+            document.querySelector('.js-paginate-button-next').setAttribute('disabled', 'disabled');
+        } else {
+            document.querySelector('.js-paginate-button-next').removeAttribute('disabled');
+        }
 
     }
 }
