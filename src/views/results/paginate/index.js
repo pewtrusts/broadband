@@ -82,7 +82,6 @@ export default class Paginate extends Element {
         PS.setSubs([
             ['page', updateBind]
         ]);
-        S.setState('page', 1);
         
         //page buttons
         this.pageButtons.forEach(button => {

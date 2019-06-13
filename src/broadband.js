@@ -3,7 +3,7 @@
 import Papa from 'papaparse';
 import { stateModule as S } from 'stateful-dead';
 import * as d3 from 'd3-collection';
-//import PS from 'pubsub-setter';
+import PS from 'pubsub-setter';
 
 //import { publishWindowResize } from '@Utils';
 
@@ -19,7 +19,7 @@ import PCTApp from '@App';
 
 //static content
 
-//publishWindowResize(S);
+const itemsPerPage = 10;
 
 const categories = [
     'state',
@@ -65,6 +65,7 @@ function getRuntimeData() {
 
 export default class Broadband extends PCTApp {
     prerender() { //App.prerender is called only if env = development or window isPrerendering 
+        this.itemsPerPage = itemsPerPage;
         this.getDataAndPushViews();
     }
     /*onViewsReady(){
@@ -85,6 +86,7 @@ export default class Broadband extends PCTApp {
                 this.el.setAttribute('data-data-mismatch', true);
                 this.model.isMismatched = true;
             }
+            this.model.filteredData = this.model.data.slice(); // slice to create copy rather than reference
             this.nestData();
             this.pushViews();
             if (process.env.NODE_ENV === 'development' || window.IS_PRERENDERING) {
@@ -101,17 +103,23 @@ export default class Broadband extends PCTApp {
                     console.log('about to init:', view);
                     view.init(this);
                 });
+                S.setState('page', 1);
             }
         });
     }
     init() {
+        this.itemsPerPage = itemsPerPage;
         var env = process.env.NODE_ENV;
         super.init();
         this.bodyEventListenerBind = this.bodyEventListenerHandler.bind(this);
-        /*PS.setSubs([
-            
-        ]);*/
-        console.log(env);
+        PS.setSubs([
+           ['filter', this.filterData.bind(this)]
+        ]);
+        this.filters = {
+            state: '',
+            topic: '',
+            subtopic: ''
+        };
         if (env !== 'development') {
             this.getDataAndPushViews();
         } else {
@@ -119,6 +127,7 @@ export default class Broadband extends PCTApp {
                 console.log('about to init:', view);
                 view.init(this);
             });
+            S.setState('page', 1);
         }
     }
     pushViews() {
@@ -160,11 +169,10 @@ export default class Broadband extends PCTApp {
         this.model.nestedData = sortData([
             {
                 key: 'state',
-                values: d3.nest().key(d => d.state).sortKeys(sortAlpha).entries(this.model.data)
+                values: d3.nest().key(d => d.state).sortKeys(sortAlpha).entries(this.model.filteredData)
             },
-            ...d3.nest().key(d => d.category).sortKeys(sortCategories).key(d => d.topic).key(d => d.subtopic).entries(this.model.data)
+            ...d3.nest().key(d => d.category).sortKeys(sortCategories).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData)
         ]);
-        
     }
     setMetadata(field) {
         var set = new Set(this.model.data.map(d => d[field]));
@@ -196,5 +204,15 @@ export default class Broadband extends PCTApp {
             console.log('bodyclick');
             //S.setState('selectPrimaryGroup', null);
         }
+    }
+    filterData(msg,data){
+        var key = msg.split('.')[1];
+        this.filters[key] = data;
+        console.log(this.filters);
+        this.model.filteredData = this.model.filteredData.filter(d => {
+            return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
+        });
+        console.log(this.model.filteredData);
+        S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
     }
 }

@@ -6,8 +6,6 @@ import Paginate from './paginate';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
-const itemsPerPage = 10;
-
 export default class Results extends Element {
     
     prerender(){
@@ -15,8 +13,8 @@ export default class Results extends Element {
         var view = super.prerender();
         this.name = 'Results';
         this.addChildren([
-            this.createComponent(ListView, 'div#list-view', {data: {itemsPerPage}}),
-            this.createComponent(Paginate, 'div#pagination', {data: {itemsPerPage}})
+            this.createComponent(ListView, 'div#list-view', {data: {itemsPerPage: this.app.itemsPerPage}}),
+            this.createComponent(Paginate, 'div#pagination', {data: {itemsPerPage: this.app.itemsPerPage}})
         ]);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
