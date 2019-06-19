@@ -207,7 +207,6 @@ export default class Broadband extends PCTApp {
     }
     filterData(msg,data){
         var toArray = msg.split('.');
-        var action = toArray[0];
         var key = toArray[1];
         if ( data ){
             this.filters[key] = data;
