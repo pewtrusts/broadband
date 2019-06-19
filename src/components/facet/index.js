@@ -30,10 +30,11 @@ export default class Facet extends Element {
         var list = document.createElement('ul');
         this.data.values.forEach(topic => {
             var listItem = document.createElement('li');
-            listItem.textContent = `${topic.key} (${topic.count})`;
+            listItem.innerHTML = `${topic.key} (<span class="js-topic-count">${topic.count}</span>)`;
             listItem.dataset.value = topic.key;
             listItem.dataset.type = this.data.key === 'state' ? 'state' : 'topic';
-            listItem.classList.add('js-facet-item');
+            listItem.dataset.key = this.data.key;
+            listItem.classList.add('js-facet-item', 'js-facet-item-topic');
             
             //sublist
             if ( this.data.key !== 'state' && topic.values.length > 1 ){ // values are nested by subtopic. all have at least one (key === ''), more if there are actual keys/subtopics
@@ -60,11 +61,21 @@ export default class Facet extends Element {
         return view;
     }
     init(){
-        this.facetItems = this.el.querySelectorAll('.js-facet-item');
+        this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
+        var _this = this;
         this.facetItems.forEach(item => {
             item.addEventListener('click', function(e){
+                console.log(_this.model.nestedData);
                 e.stopPropagation();
-                S.setState('filter.' + this.dataset.type, this.dataset.value);
+                if ( !this.isSelected ){
+                    S.setState('filter.' + this.dataset.type, this.dataset.value);
+                    this.isSelected = true;
+                    this.classList.add(s.isSelected);
+                } else {
+                    S.setState('unfilter.' + this.dataset.type, this.dataset.value);
+                    this.isSelected = false;
+                    this.classList.remove(s.isSelected);
+                }
             });
         });
     }

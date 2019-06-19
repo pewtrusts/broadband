@@ -113,7 +113,8 @@ export default class Broadband extends PCTApp {
         super.init();
         this.bodyEventListenerBind = this.bodyEventListenerHandler.bind(this);
         PS.setSubs([
-           ['filter', this.filterData.bind(this)]
+           ['filter', this.filterData.bind(this)],
+           ['unfilter', this.filterData.bind(this)]
         ]);
         this.filters = {
             state: '',
@@ -206,13 +207,18 @@ export default class Broadband extends PCTApp {
         }
     }
     filterData(msg,data){
-        var key = msg.split('.')[1];
-        this.filters[key] = data;
-        console.log(this.filters);
-        this.model.filteredData = this.model.filteredData.filter(d => {
+        var toArray = msg.split('.');
+        var action = toArray[0];
+        var key = toArray[1];
+        if ( action === 'filter' ){
+            this.filters[key] = data;
+        } else {
+            this.filters[key] = '';
+        }
+        // all topics and subtopics within categories are mutually exclusive, i.e., no items belong to more than one, so this filtering can be pretty simple
+        this.model.filteredData = this.model.data.filter(d => {
             return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
         });
-        console.log(this.model.filteredData);
         S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
     }
 }
