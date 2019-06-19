@@ -36,7 +36,6 @@ export default class FilterView extends Element {
         //subscribe to secondary dimension , drilldown, details
     }
     updateCounts(){ // updateCounts is a method of the view and not facet components so that it only runs once per update
-        /* eslint no-debugger: off */
         this.app.nestData();
         console.log(this.model.nestedData);
         this.facetItems.forEach(facet => {
@@ -56,9 +55,6 @@ export default class FilterView extends Element {
                 } else {
                     countSpan.textContent = 0;
                 }
-            }
-            if ( value === "Legislative Intent" ){
-                debugger;
             }
         });
     }

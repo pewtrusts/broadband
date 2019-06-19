@@ -149,13 +149,14 @@ export default class Broadband extends PCTApp {
                 var count = datum.values.reduce(function(acc,cur){
                     return acc + cur.values.length;
                 },0);
-                datum.count = count;
+                datum.count = count; // TO DO . side feect. find more transparent way to add counts
                 return count;
             }
             data.forEach(function(d){
                 if ( d.key !== 'state' ){
                     d.values.sort(function(a,b){
-                        a.count = flatCount(a); // add count property as side effect of sorting function
+                        a.count = flatCount(a); // add count property as side effect of sorting function // TODO MUST BE MORE TRANSPARENT WAY TO DO THIS
+                        b.count = flatCount(b); // add count property as side effect of sorting function
                         return flatCount(b) - flatCount(a);
                     });
                 } else {
