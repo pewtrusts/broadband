@@ -72,7 +72,6 @@ export default class Paginate extends Element {
         return view;
     }
     init(){
-        var updateBind = this.update.bind(this);
         this.prevButton = document.querySelector('.js-paginate-button-prev');
         this.firstButton = document.querySelector('.js-paginate-button-first');
         this.pageButtons = document.querySelectorAll('.js-paginate-button-page');
@@ -80,7 +79,7 @@ export default class Paginate extends Element {
         this.nextButton = document.querySelector('.js-paginate-button-next');
         this.paginationCount = document.querySelector('.js-pagination-count');
         PS.setSubs([
-            ['page', updateBind]
+            ['page', this.update.bind(this)]
         ]);
         
         //page buttons
@@ -139,10 +138,11 @@ export default class Paginate extends Element {
     }
     updateButtonRange(data){
         var start = +data < 5 ? 0 : +data > this.pageCount - 3 ? this.pageCount - 7 : +data - 4;
+        var end = Math.min(this.pageCount, start + 7);
         this.pageButtons.forEach(button => {
             button.setAttribute('hidden','hidden');
         });
-        for ( let i = start; i < start + 7; i++){
+        for ( let i = start; i < end; i++){
             this.pageButtons[i].removeAttribute('hidden');
         }
     }
