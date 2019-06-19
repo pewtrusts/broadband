@@ -113,8 +113,7 @@ export default class Broadband extends PCTApp {
         super.init();
         this.bodyEventListenerBind = this.bodyEventListenerHandler.bind(this);
         PS.setSubs([
-           ['filter', this.filterData.bind(this)],
-           ['unfilter', this.filterData.bind(this)]
+           ['filter', this.filterData.bind(this)]
         ]);
         this.filters = {
             state: '',
@@ -210,7 +209,7 @@ export default class Broadband extends PCTApp {
         var toArray = msg.split('.');
         var action = toArray[0];
         var key = toArray[1];
-        if ( action === 'filter' ){
+        if ( data ){
             this.filters[key] = data;
         } else {
             this.filters[key] = '';

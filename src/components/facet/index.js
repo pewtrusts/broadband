@@ -72,7 +72,7 @@ export default class Facet extends Element {
                     this.isSelected = true;
                     this.classList.add(s.isSelected);
                 } else {
-                    S.setState('unfilter.' + this.dataset.type, this.dataset.value);
+                    S.setState('filter.' + this.dataset.type, null);
                     this.isSelected = false;
                     this.classList.remove(s.isSelected);
                 }
