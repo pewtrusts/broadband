@@ -1,7 +1,7 @@
 import Element from '@UI/element';
 import Facet from '@Project/components/facet';
 //import s from './styles.scss';
-import PS from 'pubsub-setter';
+//import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
@@ -24,10 +24,10 @@ export default class FilterView extends Element {
         return view;
     }
     init(){
-        this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
-        PS.setSubs([
-            ['listIDs', this.updateCounts.bind(this)]
-        ]);
+        this.app.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
+        this.app.updateCounts = this.updateCounts; // elevates updateCounts method to property of app because it is triggered in app
+/*        PS.setSubs([
+        ]);*/
 /*        PS.setSubs([
             ['selectHIA', this.activate.bind(this)]
         ]);*/
@@ -35,10 +35,10 @@ export default class FilterView extends Element {
 
         //subscribe to secondary dimension , drilldown, details
     }
-    updateCounts(){ // updateCounts is a method of the view and not facet components so that it only runs once per update
-        this.app.nestData();
+    updateCounts(){ // updateCounts is set in init() to be a method of the App. 
+        this.nestData();
         console.log(this.model.nestedData);
-        this.facetItems.forEach(facet => {
+        this.facetItems.forEach(facet => {  
             function disableFacet(){
                 facet.setAttribute('disabled', 'disabled');
                 facet.isDisabled = true;

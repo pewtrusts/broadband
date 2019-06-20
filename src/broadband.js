@@ -10,6 +10,7 @@ import PS from 'pubsub-setter';
 //data 
 import data from './data/data.csv';
 import dictionary from './data/dictionary.json';
+import stateAbbreviations from './data/state-abbreviations.json';
 
 //views
 import Sidebar from './views/sidebar/';
@@ -32,7 +33,8 @@ const categories = [
     'other'
 ];
 const model = {
-    dictionary
+    dictionary,
+    stateAbbreviations
 };
 
 function addIDs(data) {
@@ -101,6 +103,7 @@ export default class Broadband extends PCTApp {
             }
             this.filterData(null); // using this fn to keep things DRY; will make this.model.filteredData a copy of this.model.data
             this.nestData();
+            this.summarizeData();
             this.pushViews();
             if (process.env.NODE_ENV === 'development' || window.IS_PRERENDERING) {
                 Promise.all(this.views.map(view => view.isReady)).then(() => {
@@ -119,6 +122,9 @@ export default class Broadband extends PCTApp {
                 S.setState('page', 1);
             }
         });
+    }
+    summarizeData(){
+        this.model.stateMax = Math.max(...this.model.nestedData.find(d => d.key === 'state').values.map(v => v.values.length));
     }
     init() {
         this.itemsPerPage = itemsPerPage;
@@ -210,6 +216,7 @@ export default class Broadband extends PCTApp {
             return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
         });
         if ( msg ) {
+            this.updateCounts();
             S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
         }
     }

@@ -1,6 +1,7 @@
 import Element from '@UI/element';
 import s from './styles.scss';
 import FilterView from './filter-view';
+import MapView from './map-view';
 //import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
@@ -14,6 +15,7 @@ export default class Sidebar extends Element {
         var view = super.prerender();
         this.name = 'Sidebar';
         this.addChildren([
+            this.createComponent(MapView, 'div#map-view'),
             this.createComponent(FilterView, 'div#filter-view')
         ]);
         if ( this.prerendered && !this.rerender) {
