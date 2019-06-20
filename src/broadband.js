@@ -9,6 +9,7 @@ import PS from 'pubsub-setter';
 
 //data 
 import data from './data/data.csv';
+import dictionary from './data/dictionary.json';
 
 //views
 import Sidebar from './views/sidebar/';
@@ -24,14 +25,14 @@ const itemsPerPage = 10;
 const categories = [
     'state',
     'programmatic',
-    'funding',
-    'definition',
     'competition',
+    'definition',
+    'funding',
     'infrastructure',
     'other'
 ];
 const model = {
-
+    dictionary
 };
 
 function addIDs(data) {
@@ -74,9 +75,16 @@ export default class Broadband extends PCTApp {
         document.querySelector('.js-instruct-heading').style.height = height + 'px';
     }*/
     getDataAndPushViews() {
+        function sortCategories(a,b){
+            return categories.indexOf(a.category) - categories.indexOf(b.category);
+        }
+        function sortAlpha(a,b){
+            var sorted = [a,b].sort();
+            return sorted.indexOf(a) - sorted.indexOf(b);
+        }
         getRuntimeData.call(this).then((v) => {
 
-            model.data = v;
+            model.data = v.sort(function(a,b){return sortAlpha(a.subtopic,b.subtopic)}).sort(function(a,b){return sortAlpha(a.topic,b.topic)}).sort(sortCategories).sort(function(a,b){return sortAlpha(a.state,b.state)});
             /* set data-hash attribute on container on prerender. later on init the hash will be compared against the data fetched at runtime to see
                if it is the same or not. if note the same, views will have to be rerendered. */
             this.model = model;
@@ -137,14 +145,7 @@ export default class Broadband extends PCTApp {
         );
     }
     nestData() {
-        function sortCategories(a,b){
-            return categories.indexOf(a) - categories.indexOf(b);
-        }
-        function sortAlpha(a,b){
-            var sorted = [a,b].sort();
-            return sorted.indexOf(a) - sorted.indexOf(b);
-        }
-        function sortData(data){
+        /*function sortData(data){
             data.forEach(function(d){
                 if ( d.key !== 'state' ){
                     d.values.sort(function(a,b){
@@ -153,14 +154,14 @@ export default class Broadband extends PCTApp {
                 } 
             });
             return data;
-        }
-        this.model.nestedData = sortData([
+        }*/
+        this.model.nestedData = [
             {
                 key: 'state',
-                values: d3.nest().key(d => d.state).sortKeys(sortAlpha).entries(this.model.filteredData)
+                values: d3.nest().key(d => d.state).entries(this.model.filteredData)
             },
-            ...d3.nest().key(d => d.category).sortKeys(sortCategories).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData)
-        ]);
+            ...d3.nest().key(d => d.category).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData)
+        ];
         this.addFlatCounts();
     }
     setMetadata(field) {

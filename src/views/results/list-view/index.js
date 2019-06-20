@@ -20,9 +20,11 @@ export default class ListView extends Element {
         var html = this.model.data.reduce((acc, cur) => {
             var section = `
             <div class="js-list-item ${s.listItem}" id="list-item-${cur.id}">
-              <h2>${cur.title}</h2>
-              <p><strong>State:</strong> ${cur.state}</p>
+              <h2>${cur.topic}: ${cur.title}</h2>
+              <p><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
               <p><strong>Topic:</strong> ${cur.topic}</p>
+              ${ cur.subtopic ? '<p><strong>Subtopic: </strong>' + cur.subtopic + '</p>' : ''}
+              <p><strong>State:</strong> ${cur.state}</p>
               <p><strong>Name:</strong> ${cur.name}</p>
               <p>${cur.description}</p>
             </div>

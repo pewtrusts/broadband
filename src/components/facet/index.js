@@ -19,7 +19,7 @@ export default class Facet extends Element {
         
         //heading
         var heading = document.createElement('div');
-        heading.textContent = this.data.key;
+        heading.textContent = this.model.dictionary[this.data.key];
         heading.classList.add(s.searchFacetHeading);
 
         //body
