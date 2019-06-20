@@ -39,6 +39,14 @@ export default class FilterView extends Element {
         this.app.nestData();
         console.log(this.model.nestedData);
         this.facetItems.forEach(facet => {
+            function disableFacet(){
+                facet.setAttribute('disabled', 'disabled');
+                facet.isDisabled = true;
+            }
+            function enableFacet(){
+                facet.removeAttribute('disabled');
+                facet.isDisabled = false;
+            }
             var countSpan = facet.querySelector('.js-topic-count');
             var type = facet.dataset.type;
             var key = facet.dataset.key;
@@ -46,14 +54,17 @@ export default class FilterView extends Element {
             var datum = this.model.nestedData.find(d => d.key === key);
             if ( !datum ){
                 countSpan.textContent = 0;
+                disableFacet();
                 return;
             }
             if ( type === 'topic' || type === 'state' ) {
                 let match = datum.values.find(v => v.key === value);
                 if ( match ) {
-                    countSpan.textContent = match.count;  // TODO:  not sure why some datums are missing count properties. must be something in app.nestData
+                    countSpan.textContent = match.count;
+                    enableFacet();
                 } else {
                     countSpan.textContent = 0;
+                    disableFacet();
                 }
             }
         });

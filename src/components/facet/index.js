@@ -34,7 +34,9 @@ export default class Facet extends Element {
             listItem.dataset.value = topic.key;
             listItem.dataset.type = this.data.key === 'state' ? 'state' : 'topic';
             listItem.dataset.key = this.data.key;
-            listItem.classList.add('js-facet-item', 'js-facet-item-topic');
+            listItem.classList.add(s.facetItem, 'js-facet-item', 'js-facet-item-topic');
+            listItem.setAttribute('role','button');
+
             
             //sublist
             if ( this.data.key !== 'state' && topic.values.length > 1 ){ // values are nested by subtopic. all have at least one (key === ''), more if there are actual keys/subtopics
@@ -45,6 +47,8 @@ export default class Facet extends Element {
                     subitem.classList.add('js-facet-item');
                     subitem.dataset.value = subtopic.key;
                     subitem.dataset.type = 'subtopic';
+                    subitem.setAttribute('role','button');
+
                     sublist.appendChild(subitem);
                 });
                 listItem.appendChild(sublist);
@@ -62,11 +66,13 @@ export default class Facet extends Element {
     }
     init(){
         this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
-        var _this = this;
+       // var _this = this;
         this.facetItems.forEach(item => {
             item.addEventListener('click', function(e){
-                console.log(_this.model.nestedData);
                 e.stopPropagation();
+                if ( this.isDisabled ) {
+                    return;
+                }
                 if ( !this.isSelected ){
                     S.setState('filter.' + this.dataset.type, this.dataset.value);
                     this.isSelected = true;

@@ -7,3 +7,6 @@
 .isSelected {
     font-weight: bold;
 }
+.facetItem[disabled] {
+    color: $gray;
+}
