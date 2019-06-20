@@ -51,7 +51,7 @@ export default class FilterView extends Element {
             if ( type === 'topic' || type === 'state' ) {
                 let match = datum.values.find(v => v.key === value);
                 if ( match ) {
-                    countSpan.textContent = match.count || match.values[0].values.length;  // TODO:  not sure why some datums are missing count properties. must be something in app.nestData
+                    countSpan.textContent = match.count;  // TODO:  not sure why some datums are missing count properties. must be something in app.nestData
                 } else {
                     countSpan.textContent = 0;
                 }

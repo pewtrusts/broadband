@@ -80,13 +80,18 @@ export default class Broadband extends PCTApp {
             /* set data-hash attribute on container on prerender. later on init the hash will be compared against the data fetched at runtime to see
                if it is the same or not. if note the same, views will have to be rerendered. */
             this.model = model;
+            this.filters = {
+                state: '',
+                topic: '',
+                subtopic: ''
+            };
             if ( window.IS_PRERENDERING ) {
                 this.el.setAttribute('data-data-hash', JSON.stringify(v).hashCode()); // hashCode is helper function from utils, imported and IIFE'd in index.js
             } else if (process.env.NODE_ENV === 'production' && this.el.dataset.dataHash != JSON.stringify(v).hashCode()) {
                 this.el.setAttribute('data-data-mismatch', true);
                 this.model.isMismatched = true;
             }
-            this.model.filteredData = this.model.data.slice(); // slice to create copy rather than reference
+            this.filterData(null); // using this fn to keep things DRY; will make this.model.filteredData a copy of this.model.data
             this.nestData();
             this.pushViews();
             if (process.env.NODE_ENV === 'development' || window.IS_PRERENDERING) {
@@ -115,11 +120,6 @@ export default class Broadband extends PCTApp {
         PS.setSubs([
            ['filter', this.filterData.bind(this)]
         ]);
-        this.filters = {
-            state: '',
-            topic: '',
-            subtopic: ''
-        };
         if (env !== 'development') {
             this.getDataAndPushViews();
         } else {
@@ -145,25 +145,12 @@ export default class Broadband extends PCTApp {
             return sorted.indexOf(a) - sorted.indexOf(b);
         }
         function sortData(data){
-            function flatCount(datum){
-                var count = datum.values.reduce(function(acc,cur){
-                    return acc + cur.values.length;
-                },0);
-                datum.count = count; // TO DO . side feect. find more transparent way to add counts
-                return count;
-            }
             data.forEach(function(d){
                 if ( d.key !== 'state' ){
                     d.values.sort(function(a,b){
-                        a.count = flatCount(a); // add count property as side effect of sorting function // TODO MUST BE MORE TRANSPARENT WAY TO DO THIS
-                        b.count = flatCount(b); // add count property as side effect of sorting function
-                        return flatCount(b) - flatCount(a);
+                        return b.count - a.count;
                     });
-                } else {
-                    d.values.forEach(state => {
-                        state.count = state.values.length;
-                    });
-                }
+                } 
             });
             return data;
         }
@@ -174,6 +161,7 @@ export default class Broadband extends PCTApp {
             },
             ...d3.nest().key(d => d.category).sortKeys(sortCategories).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData)
         ]);
+        this.addFlatCounts();
     }
     setMetadata(field) {
         var set = new Set(this.model.data.map(d => d[field]));
@@ -207,17 +195,31 @@ export default class Broadband extends PCTApp {
         }
     }
     filterData(msg,data){
-        var toArray = msg.split('.');
-        var key = toArray[1];
-        if ( data ){
-            this.filters[key] = data;
-        } else {
-            this.filters[key] = '';
+        if ( msg ){ // user triggers to filter data will include a msg; data will be null to undo a filter or a string to perform a filter; when initializing, the msg will be null
+            let toArray = msg.split('.');
+            let key = toArray[1];
+            if ( data ){
+                this.filters[key] = data;
+            } else {
+                this.filters[key] = '';
+            }
         }
         // all topics and subtopics within categories are mutually exclusive, i.e., no items belong to more than one, so this filtering can be pretty simple
         this.model.filteredData = this.model.data.filter(d => {
             return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
         });
-        S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
+        if ( msg ) {
+            S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
+        }
+    }
+    addFlatCounts(){
+        this.model.nestedData.forEach(category => { // if not a topic (not as state) the count has to iterate over the subtopic values (hence the redice fn); if a state, there are no subtopic values
+            category.values.forEach(datum => {
+                var count = category.key !== 'state' ? datum.values.reduce(function(acc,cur){
+                        return acc + cur.values.length;
+                    },0) : datum.values.length;
+                datum.count = count;
+            });
+        });
     }
 }
