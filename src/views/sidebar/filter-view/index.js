@@ -24,7 +24,7 @@ export default class FilterView extends Element {
         return view;
     }
     init(){
-        this.facetItems = this.el.querySelectorAll('.js-facet-item-topic'); // these are rendered and initialized in component/facet
+        this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
         PS.setSubs([
             ['listIDs', this.updateCounts.bind(this)]
         ]);
@@ -47,25 +47,31 @@ export default class FilterView extends Element {
                 facet.removeAttribute('disabled');
                 facet.isDisabled = false;
             }
-            var countSpan = facet.querySelector('.js-topic-count');
-            var type = facet.dataset.type;
-            var key = facet.dataset.key;
-            var value = facet.dataset.value;
-            var datum = this.model.nestedData.find(d => d.key === key);
-            if ( !datum ){
-                countSpan.textContent = 0;
-                disableFacet();
-                return;
-            }
-            if ( type === 'topic' || type === 'state' ) {
-                let match = datum.values.find(v => v.key === value);
+            function setCountAndStatus(d){
+                if ( !d ){
+                    countSpan.textContent = 0;
+                    disableFacet();
+                    return;
+                }
+                var match = d.values.find(v => v.key === value);
                 if ( match ) {
-                    countSpan.textContent = match.count;
+                    countSpan.textContent = type === 'subtopic' ? match.values.length : match.count;
                     enableFacet();
                 } else {
                     countSpan.textContent = 0;
                     disableFacet();
                 }
+            }
+            var countSpan = facet.querySelector('.js-topic-count');
+            var type = facet.dataset.type;
+            var key = facet.dataset.key;
+            var value = facet.dataset.value;
+            var datum = this.model.nestedData.find(d => d.key === key);
+            if ( type === 'topic' || type === 'state' ) {
+                setCountAndStatus(datum, value);
+            } else { // type === 'subtopic'
+                let subdatum = datum ? datum.values.find(v => v.key === facet.dataset.topic) : null;
+                setCountAndStatus(subdatum);
             }
         });
     }
