@@ -15,17 +15,13 @@ export default class ListView extends Element {
         if (this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
-        view.classList.add('wire');
-
         var html = this.model.data.reduce((acc, cur) => {
             var section = `
             <div class="js-list-item ${s.listItem}" id="list-item-${cur.id}">
-              <h2>${cur.topic}: ${cur.title}</h2>
-              <p><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
-              <p><strong>Topic:</strong> ${cur.topic}</p>
-              ${ cur.subtopic ? '<p><strong>Subtopic: </strong>' + cur.subtopic + '</p>' : ''}
-              <p><strong>State:</strong> ${cur.state}</p>
-              <p><strong>Name:</strong> ${cur.name}</p>
+              <p class="${s.state}">${cur.state}</p>
+              <h2>${cur.name}${ this.model.names[cur.name + ' ' + cur.state] > 1 ? ' <span class="' + s.parens + '">(' + cur.topic + ')</span>' : ''}</h2>
+              <p><strong>Section:</strong> ${cur.title}</p>
+              <p><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               <p>${cur.description}</p>
             </div>
           `;

@@ -1,2 +1,17 @@
 @import '@Project/css/variable.scss';
 
+.listItem {
+    border-bottom: 1px solid $gray;
+    padding-top: 10px;
+}
+.state {
+    color: $gray;
+    text-transform: uppercase;;
+    font-size: .85em;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.parens {
+    color: $gray;
+}

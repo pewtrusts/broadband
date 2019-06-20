@@ -86,7 +86,7 @@ export default class Broadband extends PCTApp {
         }
         getRuntimeData.call(this).then((v) => {
 
-            model.data = v.sort(function(a,b){return sortAlpha(a.subtopic,b.subtopic)}).sort(function(a,b){return sortAlpha(a.topic,b.topic)}).sort(sortCategories).sort(function(a,b){return sortAlpha(a.state,b.state)});
+            model.data = v.sort(function(a,b){return sortAlpha(a.subtopic,b.subtopic)}).sort(function(a,b){return sortAlpha(a.topic,b.topic)}).sort(sortCategories).sort(function(a,b){return sortAlpha(a.name,b.name)}).sort(function(a,b){return sortAlpha(a.state,b.state)});
             /* set data-hash attribute on container on prerender. later on init the hash will be compared against the data fetched at runtime to see
                if it is the same or not. if note the same, views will have to be rerendered. */
             this.model = model;
@@ -125,6 +125,7 @@ export default class Broadband extends PCTApp {
     }
     summarizeData(){
         this.model.stateMax = Math.max(...this.model.nestedData.find(d => d.key === 'state').values.map(v => v.values.length));
+        this.model.names = d3.nest().key(d => d.name + ' ' + d.state).rollup(v => v.length).object(this.model.data);
     }
     init() {
         this.itemsPerPage = itemsPerPage;

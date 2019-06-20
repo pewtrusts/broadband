@@ -20,7 +20,6 @@ export default class Results extends Element {
             return view; // if prerendered and no need to render (no data mismatch)
         }
         view.classList.add(s.results);
-        view.classList.add('wire');
         return view;
     }
     init(){
