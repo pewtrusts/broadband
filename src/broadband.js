@@ -71,6 +71,17 @@ export default class Broadband extends PCTApp {
         this.itemsPerPage = itemsPerPage;
         this.getDataAndPushViews();
     }
+    sortAlpha(a,b, direction = 'ascending'){
+        var sorted = [a,b].sort();
+        return direction === 'ascending' ? sorted.indexOf(a) - sorted.indexOf(b) : sorted.indexOf(b) - sorted.indexOf(a);
+    }
+    sortNum(a,b, direction = 'ascending'){
+        if ( direction === 'ascending' ){
+            return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+         } else {
+            return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+         }
+    }
     /*onViewsReady(){
         //adjust heading height
         var height = document.querySelector('.js-dropdown').offsetHeight + document.querySelector('.js-legend').offsetHeight;
@@ -80,13 +91,9 @@ export default class Broadband extends PCTApp {
         function sortCategories(a,b){
             return categories.indexOf(a.category) - categories.indexOf(b.category);
         }
-        function sortAlpha(a,b){
-            var sorted = [a,b].sort();
-            return sorted.indexOf(a) - sorted.indexOf(b);
-        }
         getRuntimeData.call(this).then((v) => {
 
-            model.data = v.sort(function(a,b){return sortAlpha(a.subtopic,b.subtopic)}).sort(function(a,b){return sortAlpha(a.topic,b.topic)}).sort(sortCategories).sort(function(a,b){return sortAlpha(a.name,b.name)}).sort(function(a,b){return sortAlpha(a.state,b.state)});
+            model.data = v.sort((a,b) => this.sortAlpha(a.subtopic,b.subtopic)).sort((a,b) => this.sortAlpha(a.topic,b.topic)).sort(sortCategories).sort((a,b) => this.sortAlpha(a.name,b.name)).sort((a,b) => this.sortAlpha(a.state,b.state));
             /* set data-hash attribute on container on prerender. later on init the hash will be compared against the data fetched at runtime to see
                if it is the same or not. if note the same, views will have to be rerendered. */
             this.model = model;
@@ -216,10 +223,11 @@ export default class Broadband extends PCTApp {
         this.model.filteredData = this.model.data.filter(d => {
             return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
         });
+        this.listIDs = this.model.filteredData.map(d => 'list-item-' + d.id);
         if ( msg ) {
             this.updateCounts();
-            S.setState('listIDs', this.model.filteredData.map(d => 'list-item-' + d.id));
-        }
+            S.setState('listIDs', this.listIDs);
+        } 
     }
     addFlatCounts(){
         this.model.nestedData.forEach(category => { // if not a topic (not as state) the count has to iterate over the subtopic values (hence the redice fn); if a state, there are no subtopic values

@@ -1,30 +1,27 @@
 import Element from '@UI/element';
-import s from './styles.scss';
-import ListView from './list-view';
-import Paginate from './paginate';
-import SortControls from './sort-controls';
+import Sort from '@Project/components/sort'
+//import s from './styles.scss';
 //import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
-export default class Results extends Element {
+const sortFields = ['state', 'category', 'topic', 'year'];
+
+export default class SortControls extends Element {
     
     prerender(){
          //container
         var view = super.prerender();
-        this.name = 'Results';
-        this.addChildren([
-            this.createComponent(SortControls, 'div#sort-controls'),
-            this.createComponent(ListView, 'div#list-view', {data: {itemsPerPage: this.app.itemsPerPage}}),
-            this.createComponent(Paginate, 'div#pagination', {data: {itemsPerPage: this.app.itemsPerPage}})
-        ]);
+        this.name = 'SortControls';
+        this.addChildren(sortFields.map(field => this.createComponent(Sort, 'button#sort-' + field, {data: {field}})));
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
-        view.classList.add(s.results);
+        view.classList.add('wire');
         return view;
     }
     init(){
+        this.children[0].isActive = true;
 /*        PS.setSubs([
             ['selectHIA', this.activate.bind(this)]
         ]);*/

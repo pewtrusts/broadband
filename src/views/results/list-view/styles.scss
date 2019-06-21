@@ -1,17 +1,26 @@
 @import '@Project/css/variable.scss';
 
+.listContainer {
+    display: flex;
+    flex-direction: column;
+}
 .listItem {
     border-bottom: 1px solid $gray;
     padding-top: 10px;
 }
-.state {
-    color: $gray;
-    text-transform: uppercase;;
-    font-size: .85em;
-    margin: 0;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
 .parens {
     color: $gray;
+}
+.itemHeader {
+    p {
+        color: $gray;
+        text-transform: uppercase;;
+        font-size: .85em;
+        margin: 0;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+}
+.itemHed {
+    margin-bottom: 0;
 }

@@ -9,3 +9,15 @@
 .wire {
     border: 1px solid magenta;
 }
+
+.flex {
+    display: flex;
+    p {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.space-between {
+    justify-content: space-between;
+}
