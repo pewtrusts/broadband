@@ -23,7 +23,7 @@ export default class ListView extends Element {
       return this.model.data.reduce((acc, cur) => {
             var section = `
             <div class="js-list-item ${s.listItem}" id="list-item-${cur.id}">
-              <div class="${s.itemHeader} flex space-between"><p>${cur.state}</p><p>${cur.year ? cur.year : 'no date'}</p></div>
+              <div class="${s.itemHeader} flex space-between"><p>${cur.state}</p><p>${cur.year !== 'Not specified' ? cur.year : 'no date'}</p></div>
               <h2 class="${s.itemHed}">${cur.name}${ this.model.names[cur.name + ' ' + cur.state] > 1 ? ' <span class="' + s.parens + '">(' + cur.topic + ')</span>' : ''}</h2>
               <p>${cur.title.replace(/\.$/,'')}</p>
               <div class="flex space-between">

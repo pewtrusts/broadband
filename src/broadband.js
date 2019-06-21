@@ -24,13 +24,12 @@ import PCTApp from '@App';
 const itemsPerPage = 10;
 
 const categories = [
-    'state',
     'programmatic',
     'competition',
     'definition',
     'funding',
     'infrastructure',
-    'other'
+    'other',
 ];
 const model = {
     dictionary,
@@ -61,7 +60,13 @@ function getRuntimeData() {
                 rejectWrapper({ error, file });
             },
             header: true,
-            skipEmptyLines: true
+            skipEmptyLines: true,
+            transform: function(value, header){
+                if ( header === 'year' && value === '' ) {
+                    return 'Not specified';
+                }
+                return value;
+            }
         });
     });
 }
@@ -87,20 +92,21 @@ export default class Broadband extends PCTApp {
         var height = document.querySelector('.js-dropdown').offsetHeight + document.querySelector('.js-legend').offsetHeight;
         document.querySelector('.js-instruct-heading').style.height = height + 'px';
     }*/
+    sortCategories(a,b){
+        return categories.indexOf(a.category) - categories.indexOf(b.category);
+    }
     getDataAndPushViews() {
-        function sortCategories(a,b){
-            return categories.indexOf(a.category) - categories.indexOf(b.category);
-        }
         getRuntimeData.call(this).then((v) => {
 
-            model.data = v.sort((a,b) => this.sortAlpha(a.subtopic,b.subtopic)).sort((a,b) => this.sortAlpha(a.topic,b.topic)).sort(sortCategories).sort((a,b) => this.sortAlpha(a.name,b.name)).sort((a,b) => this.sortAlpha(a.state,b.state));
+            model.data = v.sort((a,b) => this.sortAlpha(a.subtopic,b.subtopic)).sort((a,b) => this.sortAlpha(a.topic,b.topic)).sort(this.sortCategories).sort((a,b) => this.sortAlpha(a.name,b.name)).sort((a,b) => this.sortAlpha(a.state,b.state));
             /* set data-hash attribute on container on prerender. later on init the hash will be compared against the data fetched at runtime to see
                if it is the same or not. if note the same, views will have to be rerendered. */
             this.model = model;
             this.filters = {
                 state: '',
                 topic: '',
-                subtopic: ''
+                subtopic: '',
+                year: ''
             };
             if ( window.IS_PRERENDERING ) {
                 this.el.setAttribute('data-data-hash', JSON.stringify(v).hashCode()); // hashCode is helper function from utils, imported and IIFE'd in index.js
@@ -174,7 +180,11 @@ export default class Broadband extends PCTApp {
                 key: 'state',
                 values: d3.nest().key(d => d.state).entries(this.model.filteredData)
             },
-            ...d3.nest().key(d => d.category).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData)
+            ...d3.nest().key(d => d.category).sortKeys((a,b) => this.sortCategories({category: a},{category: b})).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData),
+            {
+                key: 'year',
+                values: d3.nest().key(d => d.year).sortKeys((a,b) => this.sortNum(a,b,'descending')).entries(this.model.filteredData)
+            }
         ];
         this.addFlatCounts();
     }
@@ -221,7 +231,7 @@ export default class Broadband extends PCTApp {
         }
         // all topics and subtopics within categories are mutually exclusive, i.e., no items belong to more than one, so this filtering can be pretty simple
         this.model.filteredData = this.model.data.filter(d => {
-            return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic );
+            return ( this.filters.state === '' || this.filters.state === d.state ) && ( this.filters.topic === '' || this.filters.topic === d.topic ) && ( this.filters.subtopic === '' || this.filters.subtopic === d.subtopic ) && ( this.filters.year === '' || this.filters.year === d.year );
         });
         this.listIDs = this.model.filteredData.map(d => 'list-item-' + d.id);
         if ( msg ) {
@@ -232,7 +242,7 @@ export default class Broadband extends PCTApp {
     addFlatCounts(){
         this.model.nestedData.forEach(category => { // if not a topic (not as state) the count has to iterate over the subtopic values (hence the redice fn); if a state, there are no subtopic values
             category.values.forEach(datum => {
-                var count = category.key !== 'state' ? datum.values.reduce(function(acc,cur){
+                var count = ['state','year'].indexOf(category.key) === -1 ? datum.values.reduce(function(acc,cur){
                         return acc + cur.values.length;
                     },0) : datum.values.length;
                 datum.count = count;

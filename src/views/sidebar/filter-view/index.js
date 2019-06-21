@@ -67,7 +67,7 @@ export default class FilterView extends Element {
             var key = facet.dataset.key;
             var value = facet.dataset.value;
             var datum = this.model.nestedData.find(d => d.key === key);
-            if ( type === 'topic' || type === 'state' ) {
+            if ( type === 'topic' || type === 'state' || type === 'year' ) {
                 setCountAndStatus(datum, value);
             } else { // type === 'subtopic'
                 let subdatum = datum ? datum.values.find(v => v.key === facet.dataset.topic) : null;

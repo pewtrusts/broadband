@@ -32,14 +32,14 @@ export default class Facet extends Element {
             var listItem = document.createElement('li');
             listItem.innerHTML = `${topic.key} (<span class="js-topic-count">${topic.count}</span>)`;
             listItem.dataset.value = topic.key;
-            listItem.dataset.type = this.data.key === 'state' ? 'state' : 'topic';
+            listItem.dataset.type = this.data.key === 'state' ? 'state' : this.data.key === 'year' ? 'year' : 'topic';
             listItem.dataset.key = this.data.key;
             listItem.classList.add(s.facetItem, 'js-facet-item', 'js-facet-item-topic');
             listItem.setAttribute('role','button');
 
             
             //sublist
-            if ( this.data.key !== 'state' && topic.values.length > 1 ){ // values are nested by subtopic. all have at least one (key === ''), more if there are actual keys/subtopics
+            if ( ['state','year'].indexOf(this.data.key) === -1 && topic.values.length > 1 ){ // values are nested by subtopic. all have at least one (key === ''), more if there are actual keys/subtopics
                 let sublist = document.createElement('ul');
                 topic.values.forEach(subtopic => {
                     var subitem = document.createElement('li');
