@@ -1,6 +1,6 @@
 import Element from '@UI/element';
 import Facet from '@Project/components/facet';
-//import s from './styles.scss';
+import s from './styles.scss';
 //import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
@@ -13,13 +13,38 @@ export default class FilterView extends Element {
          //container
         var view = super.prerender();
         this.name = 'FilterView';
-        this.facets = this.model.nestedData.map(d => {
-            return this.createComponent(Facet, 'div.js-search-facet-group', {data: d});
+        this.stateFacet = this.createComponent(Facet, 'div.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'state'), renderToSelector: '#state-facets-group'});
+        this.yearFacet = this.createComponent(Facet, 'div.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'year'), renderToSelector: '#year-facets-group'});
+        this.topicFacets = this.model.nestedData.filter(d => ['state','year'].indexOf(d.key) === -1).map(d => {
+            return this.createComponent(Facet, 'div.js-search-facet-group', {data: d, renderToSelector: '#topic-facets-group'});
         });
-        this.addChildren(this.facets);
+        this.addChildren([
+            this.stateFacet,
+            ...this.topicFacets,
+            this.yearFacet
+        ]);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
+
+        // state group
+        var stateGroup = document.createElement('div');
+        stateGroup.id = 'state-facets-group';
+        view.appendChild(stateGroup);
+        
+        // topic group
+        var group = document.createElement('div');
+        group.classList.add(s.topicFacetsGroup, 'has-children');
+        group.id = 'topic-facets-group';
+        group.innerHTML = '<h2>Categories/Topics</h2>';
+        view.appendChild(group);
+        
+        // year group
+        var yearGroup = document.createElement('div');
+        yearGroup.id = 'year-facets-group';
+        view.appendChild(yearGroup);
+
+
         return view;
     }
     init(){

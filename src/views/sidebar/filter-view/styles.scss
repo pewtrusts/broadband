@@ -1,0 +1,14 @@
+@import '@Project/css/variable.scss';
+
+.topicFacetsGroup {
+    //border-bottom: 5px solid $dark_blue;
+    background-color: $dark_blue;
+    h2 {
+        font-size: 14px;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 10px;
+        margin: 0;
+    }
+}
+

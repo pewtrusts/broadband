@@ -39,13 +39,13 @@ export default class Facet extends Element {
             listItem.classList.add(s.facetItem, 'js-facet-item', 'js-facet-item-topic');
             listItem.setAttribute('role','button');
 
+            list.appendChild(listItem);
             
             //sublist
             if ( ['state','year'].indexOf(this.data.key) === -1 && topic.values.length > 1 ){ // values are nested by subtopic. all have at least one (key === ''), more if there are actual keys/subtopics
-                let sublist = document.createElement('ul');
                 topic.values.forEach(subtopic => {
                     var subitem = document.createElement('li');
-                    subitem.innerHTML = `${subtopic.key} (<span class="js-topic-count">${subtopic.values.length}</span>)`;
+                    subitem.innerHTML = `&nbsp;&nbsp;-- ${subtopic.key} (<span class="js-topic-count">${subtopic.values.length}</span>)`;
                     subitem.classList.add(s.facetItem, 'js-facet-item');
                     subitem.dataset.value = subtopic.key;
                     subitem.dataset.type = 'subtopic';
@@ -53,12 +53,9 @@ export default class Facet extends Element {
                     subitem.dataset.topic = topic.key;
                     subitem.setAttribute('role','button');
 
-                    sublist.appendChild(subitem);
+                    list.appendChild(subitem);
                 });
-                listItem.appendChild(sublist);
             }
-
-            list.appendChild(listItem);
         });
 
         body.appendChild(list)

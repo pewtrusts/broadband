@@ -1,7 +1,7 @@
 @import '@Project/css/variable.scss';
 
 .facet {
-    border: 1px solid $very_light_blue;
+    border-bottom: 1px solid $very_light_blue;
     &.isOpen .searchFacetBody {
         height: auto;
     }
@@ -11,6 +11,9 @@
     max-height: 190px;
     overflow-y: scroll;
     height: 0;
+    background-color: #fff;
+    border-left: 2px solid $very_light_blue;
+    border-right: 2px solid $very_light_blue;
     ul {
         list-style: none;
         margin: 0;
@@ -39,6 +42,10 @@
     display: none;
 }
 .searchFacetHeading {
+    :global(.has-children) & {
+        //background-color: $medium_blue;
+        border-left: 10px solid $dark_blue;
+    }
     background-color: $medium_blue;
     color: #fff;
     padding: 10px;
