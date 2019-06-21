@@ -1,12 +1,69 @@
 @import '@Project/css/variable.scss';
 
-.searchFacetBody {
-    max-height: 200px;
-    overflow-y: scroll;
+.facet {
+    border: 1px solid $very_light_blue;
+    &.isOpen .searchFacetBody {
+        height: auto;
+    }
+
 }
-.isSelected {
-    font-weight: bold;
+.searchFacetBody {
+    max-height: 190px;
+    overflow-y: scroll;
+    height: 0;
+    ul {
+        list-style: none;
+        margin: 0;
+    }
+}
+
+:global(.rich-text) .facetItem, .facetItem {
+    display: block;
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 30px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    line-height: 120%;
+    &:hover {
+        background-color: $very_light_blue;
+    }
+    &.isSelected {
+        font-weight: bold;
+        background: svg-load('./checkmark.svg') $very_light_blue no-repeat calc(100% - 10px);
+    }
 }
 .facetItem[disabled] {
     color: $gray;
+    display: none;
+}
+.searchFacetHeading {
+    background-color: $medium_blue;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: none;
+    display: block;
+    position: relative;
+    border: 0;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        background-color: $dark_blue;
+    }
+   
+    :global(.icon) {
+        width: 15px;
+        height: 15px;
+        fill: #fff;
+        stroke: #fff;
+        position: absolute;
+        right: 10px;
+        transform: rotate(180deg);
+        .isOpen & {
+            transform: rotate(270deg);
+        }
+    }
 }

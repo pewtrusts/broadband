@@ -22,7 +22,6 @@ export default class MapView extends Element {
         }
         view.innerHTML = mapSVG;
         view.classList.add(s.mapView);
-        view.classList.add('wire');
 
         this.colorMap(view);
 

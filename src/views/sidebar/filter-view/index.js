@@ -20,7 +20,6 @@ export default class FilterView extends Element {
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
-        view.classList.add('wire');
         return view;
     }
     init(){
