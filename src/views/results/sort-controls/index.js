@@ -5,7 +5,7 @@ import Sort from '@Project/components/sort'
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
-const sortFields = ['state', 'category', 'topic', 'year'];
+const sortFields = ['state', 'category', 'topic', 'year', 'name'];
 
 export default class SortControls extends Element {
     

@@ -13,7 +13,7 @@ export default class Sort extends Element {
         if ( this.prerendered && !this.rerender) {
             return button; // if prerendered and no need to render (no data mismatch)
         }
-        button.textContent = this.data.field;
+        button.textContent = this.data.field === 'name' ? 'law' : this.data.field;
         button.setAttribute('role', 'button');
         button.value = this.data.field;
         return button;
