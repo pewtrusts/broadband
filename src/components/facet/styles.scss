@@ -37,14 +37,21 @@
         background: svg-load('./checkmark.svg') $very_light_blue no-repeat calc(100% - 10px);
     }
 }
+:global(.rich-text) :global(.has-children) .facetItem, :global(.has-children) .facetItem {
+    //border-left: 10px solid $dark_blue;
+}
+:global(.rich-text) :global(.has-children) .searchFacetBody, :global(.has-children) .searchFacetBody {
+    border-left-width: 0;
+}
 .facetItem[disabled] {
     color: $gray;
     display: none;
 }
 .searchFacetHeading {
     :global(.has-children) & {
+        padding-left: 25px;
         //background-color: $medium_blue;
-        border-left: 10px solid $dark_blue;
+    //    border-left: 10px solid $dark_blue;
     }
     background-color: $medium_blue;
     color: #fff;
