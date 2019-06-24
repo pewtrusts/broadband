@@ -53,6 +53,13 @@
         //background-color: $medium_blue;
     //    border-left: 10px solid $dark_blue;
     }
+    .isEmpty & {
+        background-color: $gray;
+        cursor: not-allowed;
+        &:hover {
+            background-color: $gray;
+        }
+    }
     background-color: $medium_blue;
     color: #fff;
     padding: 10px;

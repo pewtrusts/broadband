@@ -76,6 +76,18 @@ export default class Facet extends Element {
     get isOpen(){
         return this._isOpen;
     }
+    set isEmpty(bool) {
+        this._isEmpty = bool;
+        if ( bool ) {
+            this.isOpen = false;
+            this.el.classList.add(s.isEmpty);
+        } else {
+            this.el.classList.remove(s.isEmpty);
+        }
+    }
+    get isEmpty() {
+        return this._isEmpty;
+    }
     init(){
         this.isOpen = false;
         this.facetHeading = this.el.querySelector('.js-facet-heading');
@@ -99,6 +111,9 @@ export default class Facet extends Element {
             });
         });
         this.facetHeading.addEventListener('click', () => {
+            if ( this.isEmpty ) {
+                return;
+            }
             this.isOpen = !this.isOpen;
         });
     }
