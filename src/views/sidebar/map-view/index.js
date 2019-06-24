@@ -25,6 +25,8 @@ export default class MapView extends Element {
 
         this.colorMap(view);
 
+        view.insertAdjacentHTML('afterbegin', '<h2>National distribution of laws matching filter criteria</h2>');
+
         return view;
     }
     init(){

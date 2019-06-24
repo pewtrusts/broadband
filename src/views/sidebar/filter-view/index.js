@@ -26,6 +26,12 @@ export default class FilterView extends Element {
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
+        view.classList.add(s.filterView);
+        //heading
+        var heading = document.createElement('h2');
+        heading.classList.add(s.filterHeading);
+        heading.textContent = 'Filter results';
+        view.appendChild(heading);
 
         // state group
         var stateGroup = document.createElement('div');
