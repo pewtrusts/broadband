@@ -5,18 +5,32 @@
     &.isOpen .searchFacetBody {
         height: auto;
     }
+    
 
 }
 .searchFacetBody {
-    max-height: 190px;
-    overflow-y: scroll;
+    max-height: 178px;
+    overflow-y: hidden;
     height: 0;
     background-color: #fff;
     border-left: 2px solid $very_light_blue;
     border-right: 2px solid $very_light_blue;
+    position: relative;
     ul {
+        &::after{
+            content: '';
+            height: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+            background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.8));
+        }
         list-style: none;
         margin: 0;
+        max-height: 178px;
+        overflow-y: scroll;
+
     }
 }
 
@@ -29,8 +43,9 @@
     font-size: 0.875rem;
     cursor: pointer;
     line-height: 120%;
+    background-color: $very_light_blue;
     &:hover {
-        background-color: $very_light_blue;
+        background-color: darken($very_light_blue, 10%);
     }
     &.isSelected {
         font-weight: bold;
