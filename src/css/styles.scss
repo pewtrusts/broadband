@@ -1,8 +1,15 @@
 @import 'variable.scss';
 
+.rich-text .pct-overview {
+    max-width: 660px;
+    margin-left: 0 !important;
+
+}
 /* this is for global styles. selectors are not rewritten. module = false in dev config */
 
 #pew-app {
+    border-top: 1px solid $gray;
+    padding-top: 20px;
     display: flex;
     button {
         //resets HT https://gist.github.com/MoOx/9137295
