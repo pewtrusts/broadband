@@ -1,8 +1,47 @@
 @import '@Project/css/variable.scss';
+:global(#pew-app) .sortButton {
+    color: $medium_gray;
+    position: relative;
+    padding-right: 12px;
+    margin-right: 20px;
+    &::before {
+        content: '\25b2';
+        position: absolute;
+        top: 2px;
+        right: 0;
+        font-size: .5em;
+        color: lighten($medium_gray, 20%);
+    }
+    &::after {
+        content: '\25bc';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: .5em;
+        color: lighten($medium_gray, 20%);
+    }
+    &.isActive {
+        color: $medium_blue;
+        font-weight: 600;
+        text-decoration: underline;
+        &.isAscending {
+            &::before {
+                color: $medium_blue;
+            } 
+          &::after {
+            color: lighten($medium_gray, 20%);
+          }
+        }
+        &:not(.isAscending){
+            &::before {
+                color: lighten($medium_gray, 20%);
+            }
+            &::after {
+                color: $medium_blue;
+            }
+        }
 
-.isActive {
-    font-weight: bold;
-}
-.isAscending {
-    color: red;   
+        //border-bottom: 2px solid $medium_blue;
+
+    }
 }
