@@ -1,2 +1,48 @@
 @import '@Project/css/variable.scss';
 
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.paginationControls {
+    bottom: 8px;
+    position: relative;
+}
+:global(#pew-app){
+    .btn {
+        width: 28px;
+        height: 28px;
+        color: $medium_blue;
+        font-weight: bold;
+        &[disabled] {
+            color: $medium_gray
+        }
+    }
+    .btnPrev, .btnNext {
+        top: 2px;
+        position: relative;
+        
+        svg {
+            width: 11px;
+            path {
+                stroke: $medium_blue;
+            }
+        }
+        &[disabled] {
+            svg {
+                display: none;
+            }
+        }
+    }
+    .btnNext {
+        margin-left: 20px;
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+    .btnPrev {
+        margin-right: 20px;
+    }
+}

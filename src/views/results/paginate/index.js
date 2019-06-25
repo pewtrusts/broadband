@@ -2,7 +2,7 @@ import Element from '@UI/element';
 import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
-//import { GTMPush } from '@Utils';
+import arrowSVG from 'html-loader!./arrow.svg';
 
 
 
@@ -16,8 +16,7 @@ export default class Paginate extends Element {
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
-        view.classList.add('wire');
-
+        view.classList.add(s.pagination)
         //count
         var count = document.createElement('div');
         count.classList.add('js-pagination-count');
@@ -31,13 +30,16 @@ export default class Paginate extends Element {
         var prev = document.createElement('button');
         prev.setAttribute('type','button');
         prev.setAttribute('disabled','disabled');
+        prev.setAttribute('role', 'button');
         prev.classList.add(s.btn, s.btnPrev, 'js-paginate-button-prev');
+        prev.innerHTML = arrowSVG;
         controls.appendChild(prev);
 
         //go to first
         var goToFirst = document.createElement('button');
         goToFirst.setAttribute('type','button');
-        goToFirst.classList.add('js-paginate-button-first');
+        goToFirst.setAttribute('role', 'button');
+        goToFirst.classList.add(s.btn, 'js-paginate-button-first');
         goToFirst.textContent = '...';
         controls.appendChild(goToFirst);
 
@@ -45,7 +47,8 @@ export default class Paginate extends Element {
         var max = this.pageCount;// < 7 ? this.pageCount : 7;
         for ( let i = 1; i <= max; i++ ){
             let page = document.createElement('button');
-            page.classList.add('js-paginate-button-page');
+            page.setAttribute('role', 'button');
+            page.classList.add(s.btn, 'js-paginate-button-page');
             page.setAttribute('type','button');
             if ( i == 1 ){
                 page.setAttribute('disabled','disabled');
@@ -58,14 +61,17 @@ export default class Paginate extends Element {
         //go to last
         var goToLast = document.createElement('button');
         goToLast.setAttribute('type','button');
-        goToLast.classList.add('js-paginate-button-last');
+        goToLast.setAttribute('role', 'button');
+        goToLast.classList.add(s.btn, 'js-paginate-button-last');
         goToLast.textContent = '...';
         controls.appendChild(goToLast);
 
         //next
         var next = document.createElement('button');
         next.setAttribute('type','button');
+        next.setAttribute('role', 'button');
         next.classList.add(s.btn, s.btnNext, 'js-paginate-button-next');
+        next.innerHTML = arrowSVG;
         controls.appendChild(next);
 
         view.appendChild(controls);
