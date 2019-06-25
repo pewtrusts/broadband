@@ -70,6 +70,13 @@ export default class FilterView extends Element {
         }
         view.classList.add(s.filterView);
         
+        //show n of x
+        var showing = document.createElement('p');
+        var total = this.model.data.length;
+        showing.classList.add('js-showing-n-of-x', s.showing);
+        showing.innerHTML = `Showing <span class="js-showing-n">${total}</span> of ${total}`;
+        view.appendChild(showing);
+
         //heading
         var heading = document.createElement('h2');
         heading.classList.add(s.filterHeading);
@@ -81,6 +88,7 @@ export default class FilterView extends Element {
         btnContainer.classList.add('js-button-container');
         btnContainer.classList.add(s.btnContainer);
         view.appendChild(btnContainer);
+
 
         // state group
         var stateGroup = document.createElement('div');
@@ -104,12 +112,14 @@ export default class FilterView extends Element {
     }
 
     init(){
+        this.showingTotal = this.el.querySelector('.js-showing-n');
         this.app.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
         this.app.updateCounts = this.updateCounts; // elevates updateCounts method to property of app because it is triggered in app
 /*        PS.setSubs([
         ]);*/
         PS.setSubs([
-            ['counts', this.updateFacetGroupStatus.bind(this)]
+            ['counts', this.updateFacetGroupStatus.bind(this)],
+            ['listIDs', this.updateShowingTotal.bind(this)]
         ]);
         /* to do*/
 
@@ -170,6 +180,9 @@ export default class FilterView extends Element {
                 Facet.isEmpty = false;
             }
         });
+    }
+    updateShowingTotal(msg, data){
+        this.showingTotal.textContent = data.length;
     }
 }
 
