@@ -1,8 +1,40 @@
 @import '@Project/css/variable.scss';
 
+.listView {
+    margin-top: 20px;
+    max-height: calc(100vh - 200px);
+    overflow-y: hidden; 
+    position: relative;
+}
 .listContainer {
+    padding-top: 10px;
+    padding-bottom: 80px;
     display: flex;
     flex-direction: column;
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
+   // position: relative;
+    &::before {
+        content: '';
+        height: 20px;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        //background-color: red;
+    }
+    &::after {
+        content: '';
+        height: 100px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+        //background-color: red;
+    }
+
 }
 .listItem {
     border-bottom: 1px solid $gray;
