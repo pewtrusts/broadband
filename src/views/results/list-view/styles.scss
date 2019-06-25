@@ -8,8 +8,12 @@
     border-bottom: 1px solid $gray;
     padding-top: 10px;
 }
+.itemTitle {
+    font-weight: 600;
+}
 .parens {
     color: $gray;
+    font-size: 0.85em;
 }
 .itemHeader {
     p {
