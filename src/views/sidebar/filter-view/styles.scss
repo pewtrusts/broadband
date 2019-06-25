@@ -9,9 +9,25 @@
         text-transform: uppercase;
         padding: 10px;
         margin: 0;
+        letter-spacing: 1px;
     }
 }
-.filterView h2.filterHeading {
-    font-size: 1.2em;
+.filterView {
+    position: relative;;
+     h2.filterHeading {
+        font-size: 1.2em;
+    }
 }
 
+.btnContainer {
+    position: absolute;
+    top: 3px;
+    right: 0;
+}
+:global(#pew-app) .clearAll {
+    cursor: pointer;
+    &[disabled] {
+        color: $gray;
+        cursor: not-allowed;
+    }
+}

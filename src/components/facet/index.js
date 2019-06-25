@@ -1,7 +1,7 @@
 import Element from '@UI/element';
 import s from './styles.scss';
 import arrowSVG from 'html-loader!./arrow.svg';
-//import PS from 'pubsub-setter';
+import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
 
@@ -89,6 +89,9 @@ export default class Facet extends Element {
         return this._isEmpty;
     }
     init(){
+        PS.setSubs([
+            ['clearAll', this.clearAllFilters.bind(this)]
+        ]);
         this.isOpen = false;
         this.facetHeading = this.el.querySelector('.js-facet-heading');
         this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
@@ -116,5 +119,15 @@ export default class Facet extends Element {
             }
             this.isOpen = !this.isOpen;
         });
+    }
+    clearAllFilters(msg,data) {
+        if ( data ) {
+            this.facetItems.forEach(facet => {
+                facet.isSelected = false;
+                facet.classList.remove(s.isSelected);
+                S.setState('filter.' + facet.dataset.type, null);
+            });
+            this.isOpen = false;
+        }
     }
 }

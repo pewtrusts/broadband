@@ -3,9 +3,50 @@ import Facet from '@Project/components/facet';
 import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
+import { Button } from '@UI/buttons/buttons.js';
 //import { GTMPush } from '@Utils';
 
 
+class ClearAll extends Button {
+    prerender(){
+        var button = super.prerender();
+        this.name = 'ClearAll';
+        if ( this.prerendered && !this.rerender) {
+            return button; // if prerendered and no need to render (no data mismatch)
+        }
+        button.setAttribute('role', 'button');
+        button.classList.add(s.clearAll);
+        return button;
+    }
+    set isDisabled(bool) {
+        this._isDisabled = bool;
+        if ( bool ) {
+            this.el.setAttribute('disabled', 'disabled');
+        } else {
+            this.el.removeAttribute('disabled');
+        }
+    }
+    get isDisabled(){
+        return this._isDisabled;
+    }
+    init(){
+        this.isDisabled = true;
+        PS.setSubs([
+            ['listIDs', this.enableDisable.bind(this)]
+        ]);
+        this.el.addEventListener('click', this.clickHandler);
+    }
+    enableDisable(){
+        if ( Object.values(this.app.filters).join('') === '' ) {
+            this.isDisabled = true
+        } else {
+            this.isDisabled = false;
+        }
+    }
+    clickHandler(){
+        S.setState('clearAll', true);
+    }
+}
 
 export default class FilterView extends Element {
     
@@ -21,17 +62,25 @@ export default class FilterView extends Element {
         this.addChildren([
             this.stateFacet,
             ...this.topicFacets,
-            this.yearFacet
+            this.yearFacet,
+            this.createComponent(ClearAll, 'defer', {data: {key: 'clearAll', name: 'Clear all'}, renderToSelector: '.js-button-container'})
         ]);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
         view.classList.add(s.filterView);
+        
         //heading
         var heading = document.createElement('h2');
         heading.classList.add(s.filterHeading);
         heading.textContent = 'Filter results';
         view.appendChild(heading);
+
+        //button container
+        var btnContainer = document.createElement('div');
+        btnContainer.classList.add('js-button-container');
+        btnContainer.classList.add(s.btnContainer);
+        view.appendChild(btnContainer);
 
         // state group
         var stateGroup = document.createElement('div');
@@ -123,3 +172,4 @@ export default class FilterView extends Element {
         });
     }
 }
+
