@@ -54,10 +54,10 @@ export default class FilterView extends Element {
          //container
         var view = super.prerender();
         this.name = 'FilterView';
-        this.stateFacet = this.createComponent(Facet, 'div.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'state'), renderToSelector: '#state-facets-group'});
-        this.yearFacet = this.createComponent(Facet, 'div.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'year'), renderToSelector: '#year-facets-group'});
+        this.stateFacet = this.createComponent(Facet, 'div.js-search-facet-group-state.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'state'), renderToSelector: '#state-facets-group'});
+        this.yearFacet = this.createComponent(Facet, 'div.js-search-facet-group-year.js-search-facet-group', {data: this.model.nestedData.find(d => d.key === 'year'), renderToSelector: '#year-facets-group'});
         this.topicFacets = this.model.nestedData.filter(d => ['state','year'].indexOf(d.key) === -1).map(d => {
-            return this.createComponent(Facet, 'div.js-search-facet-group', {data: d, renderToSelector: '#topic-facets-group'});
+            return this.createComponent(Facet, 'div.js-search-facet-group-' + d.key + '.js-search-facet-group', {data: d, renderToSelector: '#topic-facets-group'});
         });
         this.addChildren([
             this.stateFacet,
