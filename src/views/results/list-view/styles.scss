@@ -1,6 +1,5 @@
 @import '@Project/css/variable.scss';
 
-<<<<<<< HEAD
 .listView {
     margin-top: 20px;
     overflow-y: hidden; 
@@ -10,6 +9,7 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    
 }
 .listItem {
     border-bottom: 1px solid $gray;

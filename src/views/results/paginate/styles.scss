@@ -1,7 +1,6 @@
 @import '@Project/css/variable.scss';
 
 .pagination {
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -45,4 +44,10 @@
     .btnPrev {
         margin-right: 20px;
     }
+}
+:global(#pagination-top) {
+    position: sticky;
+    top: 100px;
+    background-color: #fff;
+    padding-top: 20px;
 }

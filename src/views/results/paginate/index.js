@@ -78,12 +78,12 @@ export default class Paginate extends Element {
         return view;
     }
     init(){
-        this.prevButton = document.querySelector('.js-paginate-button-prev');
-        this.firstButton = document.querySelector('.js-paginate-button-first');
-        this.pageButtons = document.querySelectorAll('.js-paginate-button-page');
-        this.lastButton = document.querySelector('.js-paginate-button-last');
-        this.nextButton = document.querySelector('.js-paginate-button-next');
-        this.paginationCount = document.querySelector('.js-pagination-count');
+        this.prevButton = this.el.querySelector('.js-paginate-button-prev');
+        this.firstButton = this.el.querySelector('.js-paginate-button-first');
+        this.pageButtons = this.el.querySelectorAll('.js-paginate-button-page');
+        this.lastButton = this.el.querySelector('.js-paginate-button-last');
+        this.nextButton = this.el.querySelector('.js-paginate-button-next');
+        this.paginationCount = this.el.querySelector('.js-pagination-count');
         PS.setSubs([
             ['page', this.update.bind(this)]
         ]);
@@ -117,8 +117,8 @@ export default class Paginate extends Element {
         }
         this.pageCount = Math.ceil(this.model.filteredData.length / this.data.itemsPerPage);
         //handle disabled attributes
-        document.querySelector('.js-paginate-button-page[disabled]').removeAttribute('disabled');
-        document.querySelector(`.js-paginate-button-page[data-page="${data}"]`).setAttribute('disabled','disabled');
+        this.el.querySelector('.js-paginate-button-page[disabled]').removeAttribute('disabled');
+        this.el.querySelector(`.js-paginate-button-page[data-page="${data}"]`).setAttribute('disabled','disabled');
 
         //update results count
         var max = Math.min(this.data.itemsPerPage * data, this.model.filteredData.length);

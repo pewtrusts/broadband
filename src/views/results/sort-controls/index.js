@@ -1,6 +1,6 @@
 import Element from '@UI/element';
 import Sort from '@Project/components/sort'
-//import s from './styles.scss';
+import s from './styles.scss';
 //import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
@@ -17,6 +17,7 @@ export default class SortControls extends Element {
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
+        view.classList.add(s.sortControls);
         return view;
     }
     init(){

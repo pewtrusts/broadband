@@ -14,9 +14,10 @@ export default class Results extends Element {
         var view = super.prerender();
         this.name = 'Results';
         this.addChildren([
+            this.createComponent(Paginate, 'div#pagination-top', {data: {itemsPerPage: this.app.itemsPerPage}}),
             this.createComponent(SortControls, 'div#sort-controls'),
             this.createComponent(ListView, 'div#list-view', {data: {itemsPerPage: this.app.itemsPerPage}}),
-            this.createComponent(Paginate, 'div#pagination', {data: {itemsPerPage: this.app.itemsPerPage}})
+            this.createComponent(Paginate, 'div#pagination-bottom', {data: {itemsPerPage: this.app.itemsPerPage}})
         ]);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
