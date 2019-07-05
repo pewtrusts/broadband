@@ -11,6 +11,7 @@ import PS from 'pubsub-setter';
 import data from './data/data.csv';
 import dictionary from './data/dictionary.json';
 import stateAbbreviations from './data/state-abbreviations.json';
+import topicToCategory from './data/topic-to-category.json';
 
 //views
 import Sidebar from './views/sidebar/';
@@ -41,7 +42,11 @@ function addIDs(data) {
         d.id = i;
     });
 }
-
+function addCategories(data) {
+    data.forEach(function(d){
+        d.category = topicToCategory[d.topic];
+    });
+}
 function getRuntimeData() {
     var publicPath = '';
     if (process.env.NODE_ENV === 'production' && !window.IS_PRERENDERING) { // production build needs to know the public path of assets
@@ -53,6 +58,7 @@ function getRuntimeData() {
         Papa.parse(publicPath + data, {
             complete: function(results) {
                 addIDs(results.data);
+                addCategories(results.data);
                 resolveWrapper(results.data);
             },
             download: true,

@@ -37,11 +37,15 @@ export default class MapView extends Element {
         ]);
     }
     colorMap(container = this.el){
+        /* eslint no-debugger: off */
         container.querySelectorAll('.state__path').forEach(path => {
             path.style.fill = '#E1E1E1';
         });
         this.model.nestedData.find(d => d.key === 'state').values.forEach(datum => {
             var path = container.querySelector('.state-' + this.model.stateAbbreviations[datum.key] + ' path');
+            if ( !path ){
+                debugger;
+            }
             path.style.fill = this.colorScale(datum.count);
         });
     }
