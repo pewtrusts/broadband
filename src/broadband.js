@@ -186,7 +186,7 @@ export default class Broadband extends PCTApp {
                 key: 'state',
                 values: d3.nest().key(d => d.state).entries(this.model.filteredData)
             },
-            ...d3.nest().key(d => d.category).sortKeys((a,b) => this.sortCategories({category: a},{category: b})).key(d => d.topic).key(d => d.subtopic).entries(this.model.filteredData),
+            ...d3.nest().key(d => d.category).sortKeys((a,b) => this.sortCategories({category: a},{category: b})).key(d => d.topic).sortKeys((a,b) => this.sortAlpha(a,b,'ascending')).key(d => d.subtopic).sortKeys((a,b) => this.sortAlpha(a,b,'ascending')).entries(this.model.filteredData),
             {
                 key: 'year',
                 values: d3.nest().key(d => d.year).sortKeys((a,b) => this.sortNum(a,b,'descending')).entries(this.model.filteredData)
