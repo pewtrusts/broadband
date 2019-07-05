@@ -3,12 +3,12 @@
 .mapView {
     h2 {
         margin-bottom: 20px;
+        font-size: 1em;
+        margin-top: 1em;
     }
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid $gray;
     @media screen and (max-width: 910px){
-        border-bottom: none;
         order: 1;
         width: 290px;
         margin-left: 20px;

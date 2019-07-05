@@ -15,8 +15,8 @@ export default class Sidebar extends Element {
         var view = super.prerender();
         this.name = 'Sidebar';
         this.addChildren([
-            this.createComponent(MapView, 'div#map-view'),
-            this.createComponent(FilterView, 'div#filter-view')
+            this.createComponent(FilterView, 'div#filter-view'),
+            this.createComponent(MapView, 'div#map-view')
         ]);
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
