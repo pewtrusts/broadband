@@ -4,17 +4,15 @@
     min-width: 31.21%;
     margin-right: 33px;
     max-width: 31.21%;
-   
     display: flex;
     flex-direction: column;
     background-color: #fff;
-   
+    
     @media screen and (max-width: 910px){
         width: 100%;
         max-width: 100%;
         margin: 0;
         flex-direction: row;
-   
         padding-top: 20px;
     }
     @media screen and (max-width: 659px){
