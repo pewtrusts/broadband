@@ -50,4 +50,8 @@
     top: 100px;
     background-color: #fff;
     padding-top: 20px;
+    @media screen and (max-width: 910px){
+        top:0;
+        position: static;
+    }
 }

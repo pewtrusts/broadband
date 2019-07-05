@@ -12,6 +12,9 @@
     padding-top: 20px;
     display: flex;
     align-items: flex-start;
+    @media screen and (max-width: 910px){
+        flex-direction: column;
+    }
     button {
         //resets HT https://gist.github.com/MoOx/9137295
         border: none;

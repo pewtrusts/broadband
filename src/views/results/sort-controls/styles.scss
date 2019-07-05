@@ -5,4 +5,8 @@
     top: 149px;
     background-image: linear-gradient(#fff, #fff 75%, transparent);
     padding-bottom: 20px;
+    @media screen and (max-width: 910px){
+        top:0;
+        position: static;
+    }
 }

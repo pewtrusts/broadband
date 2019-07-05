@@ -17,6 +17,12 @@
      h2.filterHeading {
         font-size: 1.2em;
     }
+    @media screen and (max-width: 910px){
+        width: 600px;
+    }
+    @media screen and (max-width: 659px){
+        width: 100%;
+    }
 }
 
 .btnContainer {

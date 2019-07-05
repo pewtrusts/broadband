@@ -7,5 +7,19 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid $gray;
+    @media screen and (max-width: 910px){
+        border-bottom: none;
+        order: 1;
+        width: 290px;
+        margin-left: 20px;
+        h2 {
+            font-size: 1em;
+        }
+    }
+     @media screen and (max-width: 659px){
+        order: 0;
+        width: 100%;
+        margin-left: 0;
+     }
 }
 
