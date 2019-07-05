@@ -15,12 +15,8 @@ export default class ListView extends Element {
         if (this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
-        view.classList.add(s.listView);
-        var cont = document.createElement('div');
-        cont.classList.add(s.listContainer);
-        cont.innerHTML = this.renderList();
-
-        view.appendChild(cont);
+        view.classList.add(s.listContainer);
+        view.innerHTML = this.renderList();
         return view;
     }
     renderList(){
