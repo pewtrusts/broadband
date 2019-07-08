@@ -45,7 +45,7 @@ function addIDs(data) {
 }
 function addCategories(data) {
     data.forEach(function(d){
-        d.category = topicToCategory[d.topic].category;
+        d.category = topicToCategory[d.topic] ? topicToCategory[d.topic].category : '';
     });
 }
 function getRuntimeData() {
@@ -93,6 +93,18 @@ export default class Broadband extends PCTApp {
          } else {
             return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
          }
+    }
+    sortTopics(a,b){
+        if ( this.model.topicToCategory[a] === undefined && this.model.topicToCategory[b] === undefined ) {
+            return this.sortAlpha(a,b,'ascending');
+        }
+        if ( this.model.topicToCategory[a] === undefined ) {
+            return 1;
+        }
+        if ( this.model.topicToCategory[b] === undefined ) {
+            return -1;
+        }
+        return this.model.topicToCategory[a].order - this.model.topicToCategory[b].order;
     }
     /*onViewsReady(){
         //adjust heading height
@@ -187,7 +199,7 @@ export default class Broadband extends PCTApp {
                 key: 'state',
                 values: d3.nest().key(d => d.state).entries(this.model.filteredData)
             },
-            ...d3.nest().key(d => d.category).sortKeys((a,b) => this.sortCategories({category: a},{category: b})).key(d => d.topic).sortKeys((a,b) => this.sortAlpha(a,b,'ascending')).key(d => d.subtopic).sortKeys((a,b) => this.sortAlpha(a,b,'ascending')).entries(this.model.filteredData),
+            ...d3.nest().key(d => d.category).sortKeys((a,b) => this.sortCategories({category: a},{category: b})).key(d => d.topic).sortKeys(this.sortTopics.bind(this)).key(d => d.subtopic).sortKeys(this.sortTopics.bind(this)).entries(this.model.filteredData),
             {
                 key: 'year',
                 values: d3.nest().key(d => d.year).sortKeys((a,b) => this.sortNum(a,b,'descending')).entries(this.model.filteredData)

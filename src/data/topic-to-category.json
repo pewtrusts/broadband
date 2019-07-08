@@ -1,138 +1,174 @@
 {
     "Office": {
         "category": "programmatic",
-        "definition": "Establishes broadband office; defines authority or responsibility of broadband office"
+        "definition": "Establishes broadband office; defines authority or responsibility of broadband office",
+        "order": 0
     },
     "Task force": {
         "category": "programmatic",
-        "definition": "Establishes a broadband task force or advisory committee; defines authority or responsibility of the task force or advisory committee"
+        "definition": "Establishes a broadband task force or advisory committee; defines authority or responsibility of the task force or advisory committee",
+        "order": 1
     },
     "Mapping": {
         "category": "programmatic",
-        "definition": "Defines mapping or data collection requirements for broadband providers"
+        "definition": "Defines mapping or data collection requirements for broadband providers",
+        "order": 2
     },
     "Plan": {
         "category": "programmatic",
-        "definition": "Defines requirements for a broadband plan or strategy.  Includes requirements for local or regional plans."
+        "definition": "Defines requirements for a broadband plan or strategy.  Includes requirements for local or regional plans.",
+        "order": 3
     },
     "Promotional": {
         "category": "programmatic", 
-        "definition": "Creates a promotional program (e.g. Broadband Ready Community)"
+        "definition": "Creates a promotional program (e.g. Broadband Ready Community)",
+        "order": 4
     },
     "Goal": {
         "category": "programmatic",
-        "definition": "Defines a goal for statewide broadband service provision"
+        "definition": "Defines a goal for statewide broadband service provision",
+        "order": 5
     },
     "Agency": {
         "category": "programmatic",
-        "definition": "Tasks a specific state office or agency with overseeing broadband activity, either for state operations or generally"
+        "definition": "Tasks a specific state office or agency with overseeing broadband activity, either for state operations or generally",
+        "order": 6
     },
     "Fund": {
         "category": "funding",
-        "definition": "Establishes a fund for the purpose of expanding broadband infrastructure"
+        "definition": "Establishes a fund for the purpose of expanding broadband infrastructure",
+        "order": 0
     },
     "Fund - Other": {
         "category": "funding",
-        "definition": "Establishes a fund for another purpose that can be used to support expansion of broadband infrastructure"
+        "definition": "Establishes a fund for another purpose that can be used to support expansion of broadband infrastructure",
+        "order": 1
     },
     "State USF": {
         "category": "funding",
-        "definition": "Addresses use of state universal service funds or state high cost support mechanisms to support broadband infrastructure or access. "
+        "definition": "Addresses use of state universal service funds or state high cost support mechanisms to support broadband infrastructure or access. ",
+        "order": 2
     },
     "Tax incentives": {
         "category": "funding",
-        "definition": "Establishes a tax incentive for broadband infrastructure, equipment, or service provision"
+        "definition": "Establishes a tax incentive for broadband infrastructure, equipment, or service provision",
+        "order": 3
     },
     "Financing - Other": {
         "category": "funding",
-        "definition": "Establishes another type of funding or financing mechanism (including authorizing political subdivision to fund or finance broadband)"
+        "definition": "Establishes another type of funding or financing mechanism (including authorizing political subdivision to fund or finance broadband)",
+        "order": 4
     },
     "Definition - Broadband": {
         "category": "definition",
-        "definition": ""
+        "definition": "",
+        "order": 0
     },
     "As defined by FCC or U.S. Code": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition as defined by the FCC or as in US Code"
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition as defined by the FCC or as in US Code",
+        "order": 3
     },
     "Speed of 1.5 Mbps or less": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at speeds of less than 1.5 Mbps"
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at speeds of less than 1.5 Mbps",
+        "order": 0
     },
     "Speed of 10 Mbps / 1 Mbps": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 10 Mbps / 1 Mbps"
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 10 Mbps / 1 Mbps",
+        "order": 1
     },
     "Speed of 25 Mbps / 3 Mbps": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 25 Mbps / 3 Mbps"
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 25 Mbps / 3 Mbps",
+        "order": 2
     },
     "Defined by technology, not speed": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - defined as technology that provides high-speed access to the internet (no speed or FCC specification)"
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - defined as technology that provides high-speed access to the internet (no speed or FCC specification)",
+        "order": 4
     },
     "Definition - Unserved": {
         "category": "definition",
-        "definition": "Defines an unserved area"
+        "definition": "Defines an unserved area",
+        "order": 1
     },
     "Definition - Underserved": {
         "category": "definition",
-        "definition": "Defines an underserved area"
+        "definition": "Defines an underserved area",
+        "order": 2
     },
     "Municipal broadband": {
         "category": "competition",
-        "definition": "Addresses provision of broadband by political subdivisions"
+        "definition": "Addresses provision of broadband by political subdivisions",
+        "order": 0
     },
     "Cooperatives": {
         "category": "competition",
-        "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)"
+        "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)",
+        "order": 1
     },
     "Regulatory authority": {
         "category": "competition",
-        "definition": "Addresses jurisdiction of the Public Utilities Commission or equivalent agency to address broadband infrastructure or internet access services"
+        "definition": "Addresses jurisdiction of the Public Utilities Commission or equivalent agency to address broadband infrastructure or internet access services",
+        "order": 2
     },
     "Service provision (SP) - Other": {
         "category": "competition",
-        "definition": "Addresses other elements of service provision not specified above, such as access for multiple tenant environment or multiple dwelling unit buildings"
+        "definition": "Addresses other elements of service provision not specified above, such as access for multiple tenant environment or multiple dwelling unit buildings",
+        "order": 3
     },
     "Pole attachments": {
         "category": "infrastructure",
-        "definition": "Addresses requirements for pole owners or pole attachers related to broadband service provision."
+        "definition": "Addresses requirements for pole owners or pole attachers related to broadband service provision.",
+        "order": 0
     },
     "Permitting": {
         "category": "infrastructure",
-        "definition": "Addresses permitting for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions"
+        "definition": "Addresses permitting for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions",
+        "order": 1
     },
     "Right of way": {
         "category": "infrastructure",
-        "definition": ""
+        "definition": "",
+        "order": 3
     },
     "Dig Once": {
-        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - Dig Once policies"
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - Dig Once policies",
+        "order": 0
     },
     "Railroad": {
-        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - access to rail road rights of way"
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - access to rail road rights of way",
+        "order": 1
     },
     "ROW - Other": {
-        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions.  Policies other than Dig Once or railroad ROW."
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions.  Policies other than Dig Once or railroad ROW.",
+        "order": 2
     },
     "Wireless facilities": {
         "category": "infrastructure",
-        "definition": "Address wireless facilities (other than permitting or rights-or-way access)"
+        "definition": "Address wireless facilities (other than permitting or rights-or-way access)",
+        "order": 4
     },
     "Small cell facilities": {
         "category": "infrastructure",
-        "definition": "Addresses small cell facilities (other than permitting or rights-of-way access)"
+        "definition": "Addresses small cell facilities (other than permitting or rights-of-way access)",
+        "order": 5
     },
     "Open access": {
         "category": "infrastructure",
-        "definition": "Defines requirements for open access (both generally and for publicly-owned networks)"
+        "definition": "Defines requirements for open access (both generally and for publicly-owned networks)",
+        "order": 6
     },
     "IA - Other": {
         "category": "infrastructure",
-        "definition": "Addresses other elements of infrastructure access not specified above, such as microtrenching."
+        "definition": "Addresses other elements of infrastructure access not specified above, such as microtrenching.",
+        "order": 7
     },
     "Legislative intent": {
         "category": "other",
-        "definition": "Defines legislative intent or purpose related to broadband provisions in statute"
+        "definition": "Defines legislative intent or purpose related to broadband provisions in statute",
+        "order": 0
     },
     "Other": {
         "category": "other",
-        "definition": "Related to broadband, but not fitting any of the above categories"
+        "definition": "Related to broadband, but not fitting any of the above categories",
+        "order": 1
     }
 }
