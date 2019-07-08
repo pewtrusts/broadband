@@ -65,3 +65,17 @@
 .space-between {
     justify-content: space-between;
 }
+
+:global(.tippy-backdrop){
+    background-color: $dark_blue;
+    opacity: 1;
+}
+:global(.tippy-content){
+    font-weight: 600;
+    padding-bottom: 3px;
+    a, a:hover, a:active, a:visited {
+        color: #fff;
+        font-variant: small-caps;
+        
+    }
+}

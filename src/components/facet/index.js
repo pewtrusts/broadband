@@ -3,6 +3,7 @@ import s from './styles.scss';
 import arrowSVG from 'html-loader!./arrow.svg';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
+import tippy from 'tippy.js';
 //import { GTMPush } from '@Utils';
 
 
@@ -38,6 +39,13 @@ export default class Facet extends Element {
             listItem.dataset.key = this.data.key;
             listItem.classList.add(s.facetItem, 'js-facet-item', 'js-facet-item-topic');
             listItem.setAttribute('role','button');
+            if ( this.model.topicToCategory[topic.key] && this.model.topicToCategory[topic.key].definition !== "" ){
+                listItem.classList.add(s.hasDefinition);
+                let btn = document.createElement('button');
+                btn.classList.add('js-definition-button');
+                btn.dataset.tippyContent = this.model.topicToCategory[topic.key].definition;
+                listItem.appendChild(btn);
+            }
 
             list.appendChild(listItem);
             
@@ -52,6 +60,13 @@ export default class Facet extends Element {
                     subitem.dataset.key = this.data.key;
                     subitem.dataset.topic = topic.key;
                     subitem.setAttribute('role','button');
+                    if ( this.model.topicToCategory[subtopic.key] && this.model.topicToCategory[subtopic.key].definition !== "" ){
+                        subitem.classList.add(s.hasDefinition);
+                        let btn = document.createElement('button');
+                        btn.classList.add('js-definition-button');
+                        btn.dataset.tippyContent = this.model.topicToCategory[subtopic.key].definition;
+                        subitem.appendChild(btn);
+                    }
 
                     list.appendChild(subitem);
                 });
@@ -95,6 +110,7 @@ export default class Facet extends Element {
         this.isOpen = false;
         this.facetHeading = this.el.querySelector('.js-facet-heading');
         this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
+        this.definitionButtons = this.el.querySelectorAll('.js-definition-button');
        // var _this = this;
         this.facetItems.forEach(item => {
             item.addEventListener('click', function(e){
@@ -118,6 +134,13 @@ export default class Facet extends Element {
                 return;
             }
             this.isOpen = !this.isOpen;
+        });
+        tippy(this.definitionButtons);
+        this.definitionButtons.forEach(btn => {
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+
+            });
         });
     }
     clearAllFilters(msg,data) {

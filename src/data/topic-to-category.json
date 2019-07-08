@@ -1,30 +1,138 @@
 {
-    "Office": "programmatic",
-    "Task force": "programmatic",
-    "Mapping": "programmatic",
-    "Plan": "programmatic",
-    "Promotional": "programmatic", 
-    "Goal": "programmatic",
-    "Agency": "programmatic",
-    "Fund": "funding",
-    "Fund - Other": "funding",
-    "State USF": "funding",
-    "Tax incentives": "funding",
-    "Financing - Other": "funding",
-    "Definition - Broadband": "definition",
-    "Definition - Unserved": "definition",
-    "Definition - Underserved": "definition",
-    "Municipal broadband": "competition",
-    "Cooperatives": "competition",
-    "Regulatory authority": "competition",
-    "Service provision (SP) - Other": "competition",
-    "Pole attachments": "infrastructure",
-    "Permitting": "infrastructure",
-    "Right of way": "infrastructure",
-    "Wireless facilities": "infrastructure",
-    "Small cell facilities": "infrastructure",
-    "Open access": "infrastructure",
-    "IA - Other": "infrastructure",
-    "Legislative intent": "other",
-    "Other": "other"
+    "Office": {
+        "category": "programmatic",
+        "definition": "Establishes broadband office; defines authority or responsibility of broadband office"
+    },
+    "Task force": {
+        "category": "programmatic",
+        "definition": "Establishes a broadband task force or advisory committee; defines authority or responsibility of the task force or advisory committee"
+    },
+    "Mapping": {
+        "category": "programmatic",
+        "definition": "Defines mapping or data collection requirements for broadband providers"
+    },
+    "Plan": {
+        "category": "programmatic",
+        "definition": "Defines requirements for a broadband plan or strategy.  Includes requirements for local or regional plans."
+    },
+    "Promotional": {
+        "category": "programmatic", 
+        "definition": "Creates a promotional program (e.g. Broadband Ready Community)"
+    },
+    "Goal": {
+        "category": "programmatic",
+        "definition": "Defines a goal for statewide broadband service provision"
+    },
+    "Agency": {
+        "category": "programmatic",
+        "definition": "Tasks a specific state office or agency with overseeing broadband activity, either for state operations or generally"
+    },
+    "Fund": {
+        "category": "funding",
+        "definition": "Establishes a fund for the purpose of expanding broadband infrastructure"
+    },
+    "Fund - Other": {
+        "category": "funding",
+        "definition": "Establishes a fund for another purpose that can be used to support expansion of broadband infrastructure"
+    },
+    "State USF": {
+        "category": "funding",
+        "definition": "Addresses use of state universal service funds or state high cost support mechanisms to support broadband infrastructure or access. "
+    },
+    "Tax incentives": {
+        "category": "funding",
+        "definition": "Establishes a tax incentive for broadband infrastructure, equipment, or service provision"
+    },
+    "Financing - Other": {
+        "category": "funding",
+        "definition": "Establishes another type of funding or financing mechanism (including authorizing political subdivision to fund or finance broadband)"
+    },
+    "Definition - Broadband": {
+        "category": "definition",
+        "definition": ""
+    },
+    "As defined by FCC or U.S. Code": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition as defined by the FCC or as in US Code"
+    },
+    "Speed of 1.5 Mbps or less": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at speeds of less than 1.5 Mbps"
+    },
+    "Speed of 10 Mbps / 1 Mbps": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 10 Mbps / 1 Mbps"
+    },
+    "Speed of 25 Mbps / 3 Mbps": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 25 Mbps / 3 Mbps"
+    },
+    "Defined by technology, not speed": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - defined as technology that provides high-speed access to the internet (no speed or FCC specification)"
+    },
+    "Definition - Unserved": {
+        "category": "definition",
+        "definition": "Defines an unserved area"
+    },
+    "Definition - Underserved": {
+        "category": "definition",
+        "definition": "Defines an underserved area"
+    },
+    "Municipal broadband": {
+        "category": "competition",
+        "definition": "Addresses provision of broadband by political subdivisions"
+    },
+    "Cooperatives": {
+        "category": "competition",
+        "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)"
+    },
+    "Regulatory authority": {
+        "category": "competition",
+        "definition": "Addresses jurisdiction of the Public Utilities Commission or equivalent agency to address broadband infrastructure or internet access services"
+    },
+    "Service provision (SP) - Other": {
+        "category": "competition",
+        "definition": "Addresses other elements of service provision not specified above, such as access for multiple tenant environment or multiple dwelling unit buildings"
+    },
+    "Pole attachments": {
+        "category": "infrastructure",
+        "definition": "Addresses requirements for pole owners or pole attachers related to broadband service provision."
+    },
+    "Permitting": {
+        "category": "infrastructure",
+        "definition": "Addresses permitting for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions"
+    },
+    "Right of way": {
+        "category": "infrastructure",
+        "definition": ""
+    },
+    "Dig Once": {
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - Dig Once policies"
+    },
+    "Railroad": {
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions - access to rail road rights of way"
+    },
+    "ROW - Other": {
+        "definition": "Addresses rights-of-way access for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions.  Policies other than Dig Once or railroad ROW."
+    },
+    "Wireless facilities": {
+        "category": "infrastructure",
+        "definition": "Address wireless facilities (other than permitting or rights-or-way access)"
+    },
+    "Small cell facilities": {
+        "category": "infrastructure",
+        "definition": "Addresses small cell facilities (other than permitting or rights-of-way access)"
+    },
+    "Open access": {
+        "category": "infrastructure",
+        "definition": "Defines requirements for open access (both generally and for publicly-owned networks)"
+    },
+    "IA - Other": {
+        "category": "infrastructure",
+        "definition": "Addresses other elements of infrastructure access not specified above, such as microtrenching."
+    },
+    "Legislative intent": {
+        "category": "other",
+        "definition": "Defines legislative intent or purpose related to broadband provisions in statute"
+    },
+    "Other": {
+        "category": "other",
+        "definition": "Related to broadband, but not fitting any of the above categories"
+    }
 }

@@ -34,7 +34,8 @@ const categories = [
 ];
 const model = {
     dictionary,
-    stateAbbreviations
+    stateAbbreviations,
+    topicToCategory
 };
 
 function addIDs(data) {
@@ -44,7 +45,7 @@ function addIDs(data) {
 }
 function addCategories(data) {
     data.forEach(function(d){
-        d.category = topicToCategory[d.topic];
+        d.category = topicToCategory[d.topic].category;
     });
 }
 function getRuntimeData() {
