@@ -143,7 +143,7 @@ export default class Paginate extends Element {
         this.updateButtonRange.call(this, data);
     }
     updateButtonRange(data){
-        var start = +data < 5 ? 0 : +data > this.pageCount - 3 ? this.pageCount - 7 : +data - 4;
+        var start = +data < 5 || this.pageCount <= 7 ? 0 : this.pageCount > 7 && +data > this.pageCount - 3 ? this.pageCount - 7 : +data - 4;
         var end = Math.min(this.pageCount, start + 7);
         this.pageButtons.forEach(button => {
             button.setAttribute('hidden','hidden');
