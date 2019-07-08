@@ -4,10 +4,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-top: 20px;
+    @media screen and (max-width: 910px){
+        max-width: 580px;
+    }
+    @media screen and (max-width: 659px){
+        max-width: 100%;
+    }
 }
 .paginationControls {
-    bottom: 8px;
+    bottom: 3px;
     position: relative;
+
 }
 :global(#pew-app){
     .btn {
@@ -22,6 +30,7 @@
     .btnPrev, .btnNext {
         top: 2px;
         position: relative;
+
         
         svg {
             width: 11px;
@@ -37,21 +46,37 @@
     }
     .btnNext {
         margin-left: 20px;
+        @media screen and (max-width: 450px){
+            margin: 0;
+        }
         svg {
             transform: rotate(180deg);
         }
     }
     .btnPrev {
+        @media screen and (max-width: 450px){
+            margin: 0;
+        }
         margin-right: 20px;
     }
+    .paginateFirst, .paginateLast {
+    @media screen and (max-width: 420px){
+        width: 14px;
+    }
+}
 }
 :global(#pagination-top) {
     position: sticky;
     top: 100px;
     background-color: #fff;
-    padding-top: 20px;
+    //padding-top: 20px;
     @media screen and (max-width: 910px){
         top:0;
         position: static;
     }
 }
+.paginationCount {
+    line-height: 150%;
+    padding-bottom: 10px;
+}
+

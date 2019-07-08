@@ -19,7 +19,7 @@ export default class Paginate extends Element {
         view.classList.add(s.pagination)
         //count
         var count = document.createElement('div');
-        count.classList.add('js-pagination-count');
+        count.classList.add('js-pagination-count', s.paginationCount);
         view.appendChild(count);
 
         //group
@@ -39,7 +39,7 @@ export default class Paginate extends Element {
         var goToFirst = document.createElement('button');
         goToFirst.setAttribute('type','button');
         goToFirst.setAttribute('role', 'button');
-        goToFirst.classList.add(s.btn, 'js-paginate-button-first');
+        goToFirst.classList.add(s.btn, 'js-paginate-button-first', s.paginateFirst);
         goToFirst.textContent = '...';
         controls.appendChild(goToFirst);
 
@@ -62,7 +62,7 @@ export default class Paginate extends Element {
         var goToLast = document.createElement('button');
         goToLast.setAttribute('type','button');
         goToLast.setAttribute('role', 'button');
-        goToLast.classList.add(s.btn, 'js-paginate-button-last');
+        goToLast.classList.add(s.btn, 'js-paginate-button-last', s.paginateLast);
         goToLast.textContent = '...';
         controls.appendChild(goToLast);
 
