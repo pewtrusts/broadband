@@ -24,11 +24,11 @@ export default class ListView extends Element {
             var section = `
             <div class="js-list-item ${s.listItem}" id="list-item-${cur.id}">
               <div class="${s.itemHeader} flex space-between"><p>${cur.state}</p><p>${cur.year !== 'Not specified' ? cur.year : 'no date'}</p></div>
-              <h2 class="${s.itemHed}">${cur.name}${ this.model.names[cur.name + ' ' + cur.state] > 1 ? ' <span class="' + s.parens + '">(' + cur.topic + ')</span>' : ''}</h2>
-              <p class="${s.itemTitle}">${cur.title.replace(/\.+ *$/,'')}</p>
+              <h2 class="${s.itemHed}">${cur.name}</h2>
+              <p class="${s.itemTitle}">${cur.title.replace(/\.+ *$/,'')} ${ this.model.names[cur.name + ' ' + cur.state] > 1 ? ' <span class="' + s.parens + '">(' + cur.topic + ')</span>' : ''}</p>
               <div class="flex space-between">
-                <p><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
-                <p><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
+                <p class=${s.category}><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
+                <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
               <p>${cur.description}</p>
             </div>

@@ -14,13 +14,20 @@
 .listItem {
     border-bottom: 1px solid $gray;
     padding-top: 10px;
+    p {
+        @media screen and (max-width: 610px){
+            font-size: 14px;
+            line-height: 135%;
+            margin-bottom: 14px;
+        }
+    }
 }
 .itemTitle {
     font-weight: 600;
 }
 .parens {
     color: $gray;
-    font-size: 0.85em;
+   // font-size: 0.85em;
 }
 .itemHeader {
     p {
@@ -34,4 +41,13 @@
 }
 .itemHed {
     margin-bottom: 0;
+}
+:global(.rich-text) {
+    .category, .topic {
+        width: 275px;
+        flex-grow: 1;
+    }
+}    
+:global(.rich-text) .category {
+    margin-right: 20px;
 }
