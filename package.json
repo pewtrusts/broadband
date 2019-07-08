@@ -48,7 +48,7 @@
     "stateful-dead": "^0.1.5",
     "style-loader": "^0.20.3",
     "terser-webpack-plugin": "^1.2.3",
-    "tippy.js": "^4.3.1",
+    "tippy.js": "^4.3.4",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.5",
