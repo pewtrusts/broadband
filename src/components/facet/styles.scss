@@ -70,7 +70,8 @@
     }
     &.isSelected {
         font-weight: bold;
-        background: svg-load('./checkmark.svg') $very_light_blue no-repeat calc(100% - 10px);
+        background: svg-load('./checkmark.svg') $very_light_blue no-repeat;
+        background-position:  calc(100% - 10px);
     }
 }
 :global(.rich-text) :global(.has-children) .facetItem, :global(.has-children) .facetItem {
