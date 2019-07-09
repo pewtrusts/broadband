@@ -113,7 +113,8 @@ export default class Facet extends Element {
         this.definitionButtons = this.el.querySelectorAll('.js-definition-button');
        // var _this = this;
         this.facetItems.forEach(item => {
-            Object.defineProperty(item, 'isDisabled', {
+            Object.defineProperty(item, 'isDisabled', { // IE11 is tripping up on writing a property to `item`; says isDisabled is read-only. it may be something to do withthe
+                                                        // Nodelist.prototype.forEach polyfill
                 value: false,
                 writable: true
             });
