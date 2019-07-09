@@ -113,6 +113,11 @@ export default class Facet extends Element {
         this.definitionButtons = this.el.querySelectorAll('.js-definition-button');
        // var _this = this;
         this.facetItems.forEach(item => {
+            Object.defineProperty(item, 'isDisabled', {
+                value: false,
+                writable: true
+            });
+            //item.isDisabled = false;
             item.addEventListener('click', function(e){
                 e.stopPropagation();
                 if ( this.isDisabled ) {

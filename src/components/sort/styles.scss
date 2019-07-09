@@ -25,7 +25,6 @@
     &.isActive {
         color: $medium_blue;
         font-weight: 600;
-        text-decoration: underline;
         &.isAscending {
             &::before {
                 color: $medium_blue;
