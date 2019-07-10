@@ -30,7 +30,7 @@ export default class ListView extends Element {
                 <p class=${s.category}><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
                 <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
-              <p>${cur.description}</p>
+              <p>${cur.description.replace(/¶/g,'</p><p>')}</p>
             </div>
           `;
             return acc + section;
