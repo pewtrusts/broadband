@@ -50,3 +50,23 @@
 :global(.rich-text) .category {
     margin-right: 20px;
 }
+
+:global(#pew-app) .relevantButton {
+    font-size: 19px;
+    color: $medium_blue;
+    background: svg-load('./arrow.svg', fill=#296ec3) no-repeat right 5px;
+    padding-right: 20px;
+    font-variant-caps: small-caps;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.relevantText {
+    background-color: $medium_blue;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    p {
+        font-size: 16px;
+        font-weight: 600;
+    }
+}

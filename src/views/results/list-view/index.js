@@ -31,6 +31,11 @@ export default class ListView extends Element {
                 <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
               <p>${cur.description.replace(/¶/g,'</p><p>')}</p>
+              <button role="button" class="${s.relevantButton}">read relevant code</button>
+              <div class="${s.relevantText}">
+                <h3>State Code</h3>
+                <p>${cur.relevant_text.replace(/¶/g,'</p><p>')}</p>
+              </div
             </div>
           `;
             return acc + section;
