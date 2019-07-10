@@ -13,11 +13,17 @@ export default class SortControls extends Element {
          //container
         var view = super.prerender();
         this.name = 'SortControls';
-        this.addChildren(sortFields.map(field => this.createComponent(Sort, 'button#sort-' + field, {data: {field}})));
+        this.addChildren(sortFields.map(field => this.createComponent(Sort, 'button#sort-' + field, {renderToSelector: '#sort-wrapper', data: {field}})));
         if ( this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
         view.classList.add(s.sortControls);
+
+        //wrapper
+        var wrapper = document.createElement('div');
+        wrapper.id = 'sort-wrapper';
+        view.appendChild(wrapper);
+
 
         //glossary button 
         var btn = document.createElement('button');

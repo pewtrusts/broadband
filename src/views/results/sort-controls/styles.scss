@@ -6,14 +6,17 @@
     background-image: linear-gradient(#fff, #fff 75%, rgba(255,255,255,0));
     padding-top: 10px;
     z-index: 1;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     @media screen and (max-width: 910px){
         top:0;
         position: static;
     }
 }
 :global(#pew-app) .glossaryBtn {
-    position: absolute;
-    right: 0;
+    position: relative;
+    bottom: 8px;
     font-weight: bold;
 
     &.isOpen {
