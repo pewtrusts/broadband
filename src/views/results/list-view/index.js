@@ -31,11 +31,12 @@ export default class ListView extends Element {
                 <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
               <p>${cur.description.replace(/¶/g,'</p><p>')}</p>
-              <button role="button" class="${s.relevantButton}">read relevant code</button>
-              <div class="${s.relevantText}">
+              <button aria-expanded="false" aria-label="Reveal relevant language from state code" role="button" class="js-relevant-button ${s.relevantButton}">read relevant code</button>
+              <div id="relevent-code" class="js-relevant-text ${s.relevantText}">
                 <h3>State Code</h3>
+                <button aria-label="Close text box with relevant language from state code" class="js-close-relevant ${s.closeRelevant}"></button>
                 <p>${cur.relevant_text.replace(/¶/g,'</p><p>')}</p>
-              </div
+              </div>
             </div>
           `;
             return acc + section;
@@ -45,12 +46,26 @@ export default class ListView extends Element {
         this.updateListBind = this.updateList.bind(this);
         this.listItems = this.el.querySelectorAll('.js-list-item');
         this.matchingListItems = Array.from(this.listItems).slice();
+        this.relevantButtons = this.el.querySelectorAll('.js-relevant-button');
+        this.closeRelevantButtons = this.el.querySelectorAll('.js-close-relevant');
         var showPageBind = this.showPage.bind(this);
         PS.setSubs([
             ['page', showPageBind],
             ['listIDs', this.updateListBind],
             ['sort', this.sortList.bind(this)]
         ]);
+        this.relevantButtons.forEach(btn => {
+          btn.addEventListener('click', function(){
+            this.setAttribute('aria-expanded', true);
+            this.parentNode.querySelector('.js-relevant-text').classList.add(s.show);
+          });
+        });
+        this.closeRelevantButtons.forEach(btn => {
+          btn.addEventListener('click', function(){
+            this.parentNode.classList.remove(s.show);
+            this.parentNode.parentNode.querySelector('.js-relevant-button').setAttribute('aria-expanded', false);
+          });
+        });
     }
     showPage(msg, data) {
         if (data === 0 ){

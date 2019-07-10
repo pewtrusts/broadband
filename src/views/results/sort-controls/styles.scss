@@ -5,6 +5,7 @@
     top: 149px;
     background-image: linear-gradient(#fff, #fff 75%, rgba(255,255,255,0));
     padding-top: 10px;
+    z-index: 1;
     @media screen and (max-width: 910px){
         top:0;
         position: static;
