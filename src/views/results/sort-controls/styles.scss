@@ -2,12 +2,25 @@
 
 .sortControls {
     position: sticky;
-    top: 149px;
+    top: 155px;
     background-image: linear-gradient(#fff, #fff 75%, rgba(255,255,255,0));
     padding-top: 10px;
     z-index: 1;
     @media screen and (max-width: 910px){
         top:0;
         position: static;
+    }
+}
+:global(#pew-app) .glossaryBtn {
+    position: absolute;
+    right: 0;
+    font-weight: bold;
+
+    &.isOpen {
+        color: $medium_blue;
+        border-bottom: 4px solid $medium_blue;
+    }
+    @media screen and (max-height: 910px) {
+        
     }
 }

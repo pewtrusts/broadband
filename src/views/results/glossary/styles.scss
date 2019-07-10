@@ -1,0 +1,29 @@
+@import '@Project/css/variable.scss';
+
+.glossary {
+    position: absolute;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid $gray;
+    display: none;
+    &.show {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    h3 {
+        background-image: linear-gradient(#fff, #fff 90%, rgba(255,255,255,0));
+
+    }
+}
+:global(#pew-app) .closeGlossary {
+    background: #fff svg-load('./x-out.svg', stroke=#000) no-repeat center;
+    width: 30px;
+    height: 37px;
+  
+    @media screen and (max-width: 910px) {
+        position: sticky;
+        top: 100px;
+        
+    }
+}

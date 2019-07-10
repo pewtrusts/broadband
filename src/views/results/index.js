@@ -3,6 +3,7 @@ import s from './styles.scss';
 import ListView from './list-view';
 import Paginate from './paginate';
 import SortControls from './sort-controls';
+import Glossary from './glossary';
 //import PS from 'pubsub-setter';
 //import { stateModule as S } from 'stateful-dead';
 //import { GTMPush } from '@Utils';
@@ -16,6 +17,7 @@ export default class Results extends Element {
         this.addChildren([
             this.createComponent(Paginate, 'div#pagination-top', {data: {itemsPerPage: this.app.itemsPerPage}}),
             this.createComponent(SortControls, 'div#sort-controls'),
+            this.createComponent(Glossary, 'div#glossary'),
             this.createComponent(ListView, 'div#list-view', {data: {itemsPerPage: this.app.itemsPerPage}}),
             this.createComponent(Paginate, 'div#pagination-bottom', {data: {itemsPerPage: this.app.itemsPerPage}})
         ]);
