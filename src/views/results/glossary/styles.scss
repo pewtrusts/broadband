@@ -10,7 +10,9 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        z-index: 1;
+        @media screen and (max-width: 910px) {
+            z-index: 1;
+        }
     }
     h3 {
         background-image: linear-gradient(#fff, #fff 90%, rgba(255,255,255,0));
