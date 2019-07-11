@@ -64,15 +64,16 @@ export default class Sort extends Element {
             S.setState('sort', [( this.isAscending ? 'ascending' : 'descending' ), value]);
             this.isActive = true;
         }
+        var setStateBind = setState.bind(this);
         this.app.listView.showChurning.call(this.app.listView, true);
         if ( this.isActive ){
             this.isAscending = !this.isAscending;
         }
         if ( window.requestIdleCallback ){
-            requestIdleCallback(setState.bind(this), {timeout: 1000});
+            requestIdleCallback(setStateBind());
         } else {
             setTimeout(() => {
-                setState.bind(this);
+                setStateBind();
             },500);
         }
 
