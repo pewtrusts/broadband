@@ -60,12 +60,21 @@ export default class Sort extends Element {
         //subscribe to secondary dimension , drilldown, details
     }
     clickHandler(value){
+        function setState(){
+            S.setState('sort', [( this.isAscending ? 'ascending' : 'descending' ), value]);
+            this.isActive = true;
+        }
         this.app.listView.showChurning.call(this.app.listView, true);
         if ( this.isActive ){
             this.isAscending = !this.isAscending;
         }
-        S.setState('sort', [( this.isAscending ? 'ascending' : 'descending' ), value]);
-        this.isActive = true;
+        if ( window.requestIdleCallback ){
+            requestIdleCallback(setState.bind(this), {timeout: 1000});
+        } else {
+            setTimeout(() => {
+                setState.bind(this);
+            },500);
+        }
 
     }
 }

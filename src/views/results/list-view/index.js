@@ -91,9 +91,13 @@ export default class ListView extends Element {
     }
     showChurning(bool){
       if ( bool ) {
-        this.el.classList.add(s.isChurning);
+        requestAnimationFrame(() => {
+          this.el.classList.add(s.isChurning);
+        });
       } else {
-        this.el.classList.remove(s.isChurning);
+        requestAnimationFrame(() => {
+          this.el.classList.remove(s.isChurning);
+        });
       }
     }
     updateList() {
@@ -109,7 +113,9 @@ export default class ListView extends Element {
       var direction = data[0];
       var field = data[1];
       this.model.data.sort((a,b) => field !== 'year' ? this.app.sortAlpha(a[field],b[field], direction) : this.app.sortNum(a[field],b[field], direction));
-      this.el.innerHTML = this.renderList();
+      requestAnimationFrame(() => {
+        this.el.innerHTML = this.renderList();
+      });
       this.listItems = this.el.querySelectorAll('.js-list-item');
       this.updateListBind();
     }
