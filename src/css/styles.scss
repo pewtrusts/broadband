@@ -6,7 +6,9 @@
 
 }
 /* this is for global styles. selectors are not rewritten. module = false in dev config */
-
+body {
+    overflow-x: hidden; 
+}
 #pew-app {
     border-top: 1px solid $gray;
     padding-top: 20px;
