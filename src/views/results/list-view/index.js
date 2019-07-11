@@ -112,11 +112,11 @@ export default class ListView extends Element {
     sortList(msg,data) {
       var direction = data[0];
       var field = data[1];
-      this.model.data.sort((a,b) => field !== 'year' ? this.app.sortAlpha(a[field],b[field], direction) : this.app.sortNum(a[field],b[field], direction));
+      this.model.data.sort((a,b) => field === 'category' ? this.app.sortNum(this.model.dictionary[a[field]], this.model.dictionary[b[field]], direction) : field !== 'year' ? this.app.sortAlpha(a[field],b[field], direction) : this.app.sortNum(a[field],b[field], direction));
       requestAnimationFrame(() => {
         this.el.innerHTML = this.renderList();
+        this.listItems = this.el.querySelectorAll('.js-list-item');
+        this.updateListBind();
       });
-      this.listItems = this.el.querySelectorAll('.js-list-item');
-      this.updateListBind();
     }
 }
