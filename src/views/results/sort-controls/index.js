@@ -51,10 +51,12 @@ export default class SortControls extends Element {
     }
     toggle(msg,data){
         if ( data ){
+            this.el.classList.add(s.hide);
             this.glossaryBtn.textContent = 'Hide glossary';
             this.glossaryBtn.setAttribute('aria-expanded', true);
             this.glossaryBtn.classList.add(s.isOpen);
         } else {
+            this.el.classList.remove(s.hide);
             this.glossaryBtn.textContent = 'Show glossary';
             this.glossaryBtn.setAttribute('aria-expanded', false);
             this.glossaryBtn.classList.remove(s.isOpen);

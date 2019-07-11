@@ -28,11 +28,8 @@ export default class Results extends Element {
         return view;
     }
     init(){
-/*        PS.setSubs([
-            ['selectHIA', this.activate.bind(this)]
-        ]);*/
-        /* to do*/
 
         //subscribe to secondary dimension , drilldown, details
     }
+    
 }

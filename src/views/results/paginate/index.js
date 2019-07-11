@@ -86,7 +86,8 @@ export default class Paginate extends Element {
         this.paginationCount = this.el.querySelector('.js-pagination-count');
         console.log(this);
         PS.setSubs([
-            ['page', this.update.bind(this)]
+            ['page', this.update.bind(this)],
+            ['showGlossary', this.toggle.bind(this)]
         ]);
         
         //page buttons
@@ -111,6 +112,13 @@ export default class Paginate extends Element {
         this.lastButton.addEventListener('click', () => {
             S.setState('page', this.pageCount);
         });
+    }
+    toggle(msg, data){
+        if ( data ){
+            this.el.classList.add(s.hide)
+        } else {
+            this.el.classList.remove(s.hide)
+        }
     }
     update(msg,data){
         if ( data === 0 ){

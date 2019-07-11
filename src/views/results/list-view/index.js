@@ -52,7 +52,8 @@ export default class ListView extends Element {
         PS.setSubs([
             ['page', showPageBind],
             ['listIDs', this.updateListBind],
-            ['sort', this.sortList.bind(this)]
+            ['sort', this.sortList.bind(this)],
+            ['showGlossary', this.toggle.bind(this)]
         ]);
         this.relevantButtons.forEach(btn => {
           btn.addEventListener('click', function(){
@@ -67,6 +68,13 @@ export default class ListView extends Element {
           });
         });
     }
+    toggle(msg, data){
+          if ( data ){
+              this.el.classList.add(s.hide)
+          } else {
+              this.el.classList.remove(s.hide)
+          }
+      }
     showPage(msg, data) {
         if (data === 0 ){
           return;
