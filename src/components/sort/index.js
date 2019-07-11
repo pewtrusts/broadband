@@ -70,7 +70,7 @@ export default class Sort extends Element {
             this.isAscending = !this.isAscending;
         }
         if ( window.requestIdleCallback ){
-            requestIdleCallback(setStateBind());
+            requestIdleCallback(setStateBind, {timeout: 1000});
         } else {
             setTimeout(() => {
                 setStateBind();
