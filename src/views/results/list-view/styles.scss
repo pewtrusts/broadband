@@ -13,6 +13,9 @@
     &.hide {
         opacity: 0;
     }
+    &.isChurning {
+        opacity: 0.25;
+    }
     
 }
 .listItem {

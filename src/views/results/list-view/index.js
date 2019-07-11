@@ -12,6 +12,7 @@ export default class ListView extends Element {
         //container
         var view = super.prerender();
         this.name = 'ListView';
+        this.app.listView = this;
         if (this.prerendered && !this.rerender) {
             return view; // if prerendered and no need to render (no data mismatch)
         }
@@ -88,6 +89,13 @@ export default class ListView extends Element {
             }
         }
     }
+    showChurning(bool){
+      if ( bool ) {
+        this.el.classList.add(s.isChurning);
+      } else {
+        this.el.classList.remove(s.isChurning);
+      }
+    }
     updateList() {
       var arr = Array.from(this.listItems);
        this.matchingListItems = arr.filter(item => {
@@ -95,6 +103,7 @@ export default class ListView extends Element {
         });
        S.setState('page', 0);
        S.setState('page', 1);
+       this.showChurning(false);
     }
     sortList(msg,data) {
       var direction = data[0];

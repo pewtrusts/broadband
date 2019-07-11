@@ -60,6 +60,7 @@ export default class Sort extends Element {
         //subscribe to secondary dimension , drilldown, details
     }
     clickHandler(value){
+        this.app.listView.showChurning.call(this.app.listView, true);
         if ( this.isActive ){
             this.isAscending = !this.isAscending;
         }
