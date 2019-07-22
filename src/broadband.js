@@ -129,7 +129,7 @@ export default class Broadband extends PCTApp {
             };
             if ( window.IS_PRERENDERING ) {
                 this.el.setAttribute('data-data-hash', JSON.stringify(v).hashCode()); // hashCode is helper function from utils, imported and IIFE'd in index.js
-            } else if (process.env.NODE_ENV === 'production' && this.el.dataset.dataHash != JSON.stringify(v).hashCode()) {
+            } else if (process.env.NODE_ENV !== 'development' && this.el.dataset.dataHash != JSON.stringify(v).hashCode()) {
                 this.el.setAttribute('data-data-mismatch', true);
                 this.model.isMismatched = true;
             }
@@ -184,8 +184,8 @@ export default class Broadband extends PCTApp {
     }
     pushViews() {
         this.views.push(
-            this.createComponent(Sidebar, 'div#pct-sidebar'),
-            this.createComponent(Results, 'div#pct-results'),
+            this.createComponent(Sidebar, 'div#pct-sidebar', {rerenderOnDataMismatch: true}),
+            this.createComponent(Results, 'div#pct-results', {rerenderOnDataMismatch: true}),
         );
     }
     nestData() {

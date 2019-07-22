@@ -162,9 +162,7 @@ export default class Paginate extends Element {
         for ( let i = start; i < end; i++){
             this.pageButtons[i].removeAttribute('hidden');
         }
-        setTimeout(() => {
             this.paginationControls.classList.remove(s.isLoading);
-        },10000);
     }
     updateFirstAndLast(page = S.getState('page')){
         if ( this.pageCount <= 7 ){
