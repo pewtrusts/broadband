@@ -8,11 +8,13 @@
     flex-direction: column;
     background-color: #fff;
     position: sticky;
-    top: 115px;
-    max-height: calc(100vh - 115px);
+    top: 105px;
+    height: auto;
     overflow-y: auto;
-    padding-top: 20px;
-    
+    padding-top: 0px;
+    @media screen and (max-height: 775px) {
+        position: static;
+    }
     @media screen and (max-width: 910px){
         width: 100%;
         max-width: 100%;

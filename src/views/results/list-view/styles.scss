@@ -8,10 +8,8 @@
 .listContainer {
     display: flex;
     flex-direction: column;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
     &.hide {
-        opacity: 0;
+        visibility: hidden;
     }
     &.isChurning {
         opacity: 0.25;
