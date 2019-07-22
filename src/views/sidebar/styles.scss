@@ -9,11 +9,13 @@
     background-color: #fff;
     position: sticky;
     top: 105px;
-    height: auto;
+    max-height: calc(100vh - 115px);
     overflow-y: auto;
     padding-top: 0px;
     @media screen and (max-height: 775px) {
         position: static;
+        max-height: 100%;
+        overflow-y: visible;
     }
     @media screen and (max-width: 910px){
         width: 100%;
