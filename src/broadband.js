@@ -151,6 +151,10 @@ export default class Broadband extends PCTApp {
                     console.log('about to init:', view);
                     view.init(this);
                 });
+                Promise.all(this.views.map(view => view.isReady)).then(() => {
+                    console.log('all views ready'); 
+                });
+                this.el.classList.remove('app-is-loading');
                 S.setState('page', 1);
             }
         });
@@ -168,6 +172,7 @@ export default class Broadband extends PCTApp {
            ['filter', this.filterData.bind(this)]
         ]);
         if (env !== 'development') {
+            this.el.classList.add('app-is-loading');
             this.getDataAndPushViews();
         } else {
             this.views.forEach(view => {

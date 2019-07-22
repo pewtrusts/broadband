@@ -24,7 +24,7 @@ export default class Paginate extends Element {
 
         //group
         var controls = document.createElement('div');
-        controls.classList.add(s.paginationControls);
+        controls.classList.add(s.paginationControls, 'js-pagination-controls', s.isLoading);
 
         //prev button
         var prev = document.createElement('button');
@@ -84,6 +84,7 @@ export default class Paginate extends Element {
         this.lastButton = this.el.querySelector('.js-paginate-button-last');
         this.nextButton = this.el.querySelector('.js-paginate-button-next');
         this.paginationCount = this.el.querySelector('.js-pagination-count');
+        this.paginationControls = this.el.querySelector('.js-pagination-controls');
         console.log(this);
         PS.setSubs([
             ['page', this.update.bind(this)],
@@ -112,6 +113,7 @@ export default class Paginate extends Element {
         this.lastButton.addEventListener('click', () => {
             S.setState('page', this.pageCount);
         });
+
     }
     toggle(msg, data){
         if ( data ){
@@ -160,6 +162,9 @@ export default class Paginate extends Element {
         for ( let i = start; i < end; i++){
             this.pageButtons[i].removeAttribute('hidden');
         }
+        setTimeout(() => {
+            this.paginationControls.classList.remove(s.isLoading);
+        },10000);
     }
     updateFirstAndLast(page = S.getState('page')){
         if ( this.pageCount <= 7 ){
