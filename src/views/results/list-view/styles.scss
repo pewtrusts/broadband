@@ -13,6 +13,11 @@
     }
     &.isChurning {
         opacity: 0.25;
+        &::before {
+            content: 'loading ...';
+            position: absolute;
+            
+        }
     }
     
 }

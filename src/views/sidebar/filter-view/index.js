@@ -34,7 +34,7 @@ class ClearAll extends Button {
         PS.setSubs([
             ['listIDs', this.enableDisable.bind(this)]
         ]);
-        this.el.addEventListener('click', this.clickHandler);
+        this.el.addEventListener('click', this.clickHandler.bind(this));
     }
     enableDisable(){
         if ( Object.values(this.app.filters).join('') === '' ) {
@@ -44,6 +44,7 @@ class ClearAll extends Button {
         }
     }
     clickHandler(){
+        this.app.listView.showChurning.call(this.app.listView, true);
         S.setState('clearAll', true);
     }
 }

@@ -104,6 +104,7 @@ export default class Facet extends Element {
         return this._isEmpty;
     }
     init(){
+        var _this = this;
         PS.setSubs([
             ['clearAll', this.clearAllFilters.bind(this)]
         ]);
@@ -125,10 +126,12 @@ export default class Facet extends Element {
                     return;
                 }
                 if ( !this.isSelected ){
+                    _this.app.listView.showChurning.call(_this.app.listView, true);
                     S.setState('filter.' + this.dataset.type, this.dataset.value);
                     this.isSelected = true;
                     this.classList.add(s.isSelected);
                 } else {
+                    _this.app.listView.showChurning.call(_this.app.listView, true);
                     S.setState('filter.' + this.dataset.type, null);
                     this.isSelected = false;
                     this.classList.remove(s.isSelected);
