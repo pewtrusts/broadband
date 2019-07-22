@@ -131,9 +131,11 @@ export default class FilterView extends Element {
         this.counts = {};
         console.log(this.model.nestedData);
         this.facetItems.forEach(facet => {  
-            function disableFacet(){
-                facet.setAttribute('disabled', 'disabled');
-                facet.isDisabled = true;
+            function disableFacet(isSoft){
+                if ( !isSoft) {
+                    facet.setAttribute('disabled', 'disabled');
+                }
+                facet.isDisabled = !facet.isSelected; //disable only if the facet is not selected; otherwise it can't be unselected
             }
             function enableFacet(){
                 facet.removeAttribute('disabled');
@@ -151,7 +153,12 @@ export default class FilterView extends Element {
                     let n = type === 'subtopic' ? match.values.length : match.count;
                     countSpan.textContent = n;
                     this.counts[d.key] = this.counts[d.key] ? this.counts[d.key] + n : n;  
-                    enableFacet();
+                    if ( this.listIDs.length > n ){
+                        enableFacet();
+                    } else {
+                        disableFacet(true);
+                    }
+                    
                 } else {
                     countSpan.textContent = 0;
                     this.counts[d.key] = this.counts[d.key] ? this.counts[d.key] + 0 : 0;  
