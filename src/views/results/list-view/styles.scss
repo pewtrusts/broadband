@@ -62,9 +62,20 @@
     color: $medium_blue;
     background: svg-load('./arrow.svg', fill=#296ec3) no-repeat right 5px;
     padding-right: 20px;
-    font-variant-caps: small-caps;
+    text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 20px;
+    @supports (font-variant-caps: all-small-caps){
+        font-variant-caps: all-small-caps;
+    }
+    @supports not (font-variant-caps: all-small-caps) {
+        font-size: 0.75em;
+        background-position: right 0;
+    }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        font-size: 0.75em;
+        background-position: right 0;
+    }
 }
 .relevantText {
     position: relative;    
