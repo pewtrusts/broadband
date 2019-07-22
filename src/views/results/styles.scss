@@ -3,6 +3,7 @@
 .results {
     flex-grow: 1;
     width: 66%;
+    position: relative;
     @media screen and (max-width: 910px){
         width: 100%;
     }

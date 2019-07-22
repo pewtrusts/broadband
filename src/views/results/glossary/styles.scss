@@ -6,6 +6,10 @@
     padding: 20px;
     border: 1px solid $gray;
     display: none;
+    width: 100%;
+    p {
+        width: 100%;
+    }
     &.show {
         display: flex;
         flex-direction: column;
