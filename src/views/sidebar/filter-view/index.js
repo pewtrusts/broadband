@@ -116,20 +116,17 @@ export default class FilterView extends Element {
         this.showingTotal = this.el.querySelector('.js-showing-n');
         this.app.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
         this.app.updateCounts = this.updateCounts; // elevates updateCounts method to property of app because it is triggered in app
-/*        PS.setSubs([
-        ]);*/
         PS.setSubs([
             ['counts', this.updateFacetGroupStatus.bind(this)],
             ['listIDs', this.updateShowingTotal.bind(this)]
         ]);
-        /* to do*/
-
-        //subscribe to secondary dimension , drilldown, details
     }
     updateCounts(){ // updateCounts is set in init() to be a method of the App. 
+        console.log(this);
         this.nestData();
         this.counts = {};
-        console.log(this.model.nestedData);
+        // below: IE11 is for some reason returning a Nodelist with length of 0 for this.facetItems. workaround
+        this.facetItems = this.facetItems && this.facetItems.length > 0 ? this.facetItems : document.querySelectorAll('.js-facet-item');
         this.facetItems.forEach(facet => {  
             function disableFacet(isSoft){
                 if ( !isSoft) {

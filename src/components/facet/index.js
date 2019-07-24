@@ -119,7 +119,6 @@ export default class Facet extends Element {
                 value: false,
                 writable: true
             });
-            //item.isDisabled = false;
             item.addEventListener('click', function(e){
                 e.stopPropagation();
                 if ( this.isDisabled ) {
