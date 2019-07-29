@@ -4,7 +4,7 @@ import arrowSVG from 'html-loader!./arrow.svg';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 import tippy from 'tippy.js';
-//import { GTMPush } from '@Utils';
+import { GTMPush } from '@Utils';
 
 
 
@@ -127,6 +127,7 @@ export default class Facet extends Element {
                 if ( !this.isSelected ){
                     _this.app.listView.showChurning.call(_this.app.listView, true);
                     S.setState('filter.' + this.dataset.type, this.dataset.value);
+                    GTMPush(`Broadband|Filter|${this.dataset.type}|${this.dataset.value}`);
                     this.isSelected = true;
                     this.classList.add(s.isSelected);
                 } else {
@@ -157,6 +158,7 @@ export default class Facet extends Element {
                 facet.isSelected = false;
                 facet.classList.remove(s.isSelected);
                 S.setState('filter.' + facet.dataset.type, null);
+                GTMPush('Broadband|Filter|ClearAll');
             });
             this.isOpen = false;
         }

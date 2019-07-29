@@ -2,7 +2,7 @@ import Element from '@UI/element';
 import s from './styles.scss';
 //import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
-//import { GTMPush } from '@Utils';
+import { GTMPush } from '@Utils';
 
 export default class Sort extends Element {
     
@@ -62,6 +62,7 @@ export default class Sort extends Element {
     clickHandler(value){
         function setState(){
             S.setState('sort', [( this.isAscending ? 'ascending' : 'descending' ), value]);
+            GTMPush(`Broadband|Sort|${value}|${this.isAscending ? 'ascending' : 'descending'}`);
             this.isActive = true;
         }
         var setStateBind = setState.bind(this);

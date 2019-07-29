@@ -3,7 +3,7 @@ import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 import arrowSVG from 'html-loader!./arrow.svg';
-
+import { GTMPush } from '@Utils';
 
 
 export default class Paginate extends Element {
@@ -95,23 +95,28 @@ export default class Paginate extends Element {
         this.pageButtons.forEach(button => {
             button.addEventListener('click', function(){
                 S.setState('page', +this.dataset.page);
+                GTMPush(`Broadband|ResultsPage|${+this.dataset.page}`);
             });
         });
         //prev button
         this.prevButton.addEventListener('click', function(){
             S.setState('page', +S.getState('page') - 1);
+            GTMPush(`Broadband|ResultsPage|Previous`);
         });
         //next button
         this.nextButton.addEventListener('click', function(){
             S.setState('page', +S.getState('page') + 1);
+            GTMPush(`Broadband|ResultsPage|Next`);
         });
         //go to first button
         this.firstButton.addEventListener('click', () => {
             S.setState('page', 1);
+            GTMPush(`Broadband|ResultsPage|First`);
         });
         //go to last button
         this.lastButton.addEventListener('click', () => {
             S.setState('page', this.pageCount);
+            GTMPush(`Broadband|ResultsPage|Last`);
         });
 
     }

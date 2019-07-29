@@ -2,7 +2,7 @@ import Element from '@UI/element';
 import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
-//import { GTMPush } from '@Utils';
+import { GTMPush } from '@Utils';
 
 
 export default class ListView extends Element {
@@ -59,13 +59,14 @@ export default class ListView extends Element {
         this.relevantButtons.forEach(btn => {
           btn.addEventListener('click', function(){
             this.setAttribute('aria-expanded', true);
-            this.parentNode.querySelector('.js-relevant-text').classList.add(s.show);
+            this.parentElement.querySelector('.js-relevant-text').classList.add(s.show);
+            GTMPush('Broadband|RelevantText|' + this.parentElement.querySelector('h2').textContent)
           });
         });
         this.closeRelevantButtons.forEach(btn => {
           btn.addEventListener('click', function(){
-            this.parentNode.classList.remove(s.show);
-            this.parentNode.parentNode.querySelector('.js-relevant-button').setAttribute('aria-expanded', false);
+            this.parentElement.classList.remove(s.show);
+            this.parentElement.parentElement.querySelector('.js-relevant-button').setAttribute('aria-expanded', false);
           });
         });
     }
