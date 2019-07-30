@@ -79,7 +79,7 @@ export default class Facet extends Element {
         });
         if (['state','year'].indexOf(this.data.key) === -1 ) {
             body.appendChild(topicHeading);
-            list.classList.add('hasH3')
+            list.classList.add(s.hasH3)
         }
         body.appendChild(list);
 
@@ -129,7 +129,9 @@ export default class Facet extends Element {
             });
             item.addEventListener('click', function(e){
                 e.stopPropagation();
-                if ( this.isDisabled ) {
+                var attr = this.dataset.topic;
+                var parent = document.querySelector(`.js-facet-item[data-value="${attr}"]`)
+                if ( this.isDisabled || this.hasChildSelected) {
                     return;
                 }
                 if ( !this.isSelected ){
@@ -138,11 +140,19 @@ export default class Facet extends Element {
                     GTMPush(`Broadband|Filter|${this.dataset.type}|${this.dataset.value}`);
                     this.isSelected = true;
                     this.classList.add(s.isSelected);
+                    if ( parent ){
+                        parent.hasChildSelected = true;
+                        parent.classList.add(s.hasChildSelected);
+                    }
                 } else {
                     _this.app.listView.showChurning.call(_this.app.listView, true);
                     S.setState('filter.' + this.dataset.type, null);
                     this.isSelected = false;
                     this.classList.remove(s.isSelected);
+                    if ( parent ){
+                        parent.hasChildSelected = false;
+                        parent.classList.remove(s.hasChildSelected);
+                    }
                 }
             });
         });

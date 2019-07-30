@@ -67,6 +67,10 @@
     line-height: 120%;
     background-color: $very_light_blue;
     position: relative;
+    &.hasChildSelected {
+        color: $gray;
+        cursor: not-allowed;
+    }
     //padding-right: 40px;
 
     &:hover {
