@@ -29,6 +29,11 @@ export default class Facet extends Element {
         var body = document.createElement('div');
         body.classList.add(s.searchFacetBody);
 
+        //topic h3
+        var topicHeading = document.createElement('h3');
+        topicHeading.textContent = 'topics';
+        topicHeading.classList.add(s.topicHeading);
+
         //list
         var list = document.createElement('ul');
         this.data.values.forEach(topic => {
@@ -72,8 +77,11 @@ export default class Facet extends Element {
                 });
             }
         });
-
-        body.appendChild(list)
+        if (['state','year'].indexOf(this.data.key) === -1 ) {
+            body.appendChild(topicHeading);
+            list.classList.add('hasH3')
+        }
+        body.appendChild(list);
 
         view.appendChild(heading);
         view.appendChild(body);

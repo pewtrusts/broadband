@@ -100,7 +100,7 @@ export default class FilterView extends Element {
         var group = document.createElement('div');
         group.classList.add(s.topicFacetsGroup, 'has-children');
         group.id = 'topic-facets-group';
-        group.innerHTML = '<h2>Topics/Subtopics</h2>';
+        group.innerHTML = '<h2>Categories</h2>';
         view.appendChild(group);
         
         // year group

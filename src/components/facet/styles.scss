@@ -48,6 +48,10 @@
         margin: 0;
         max-height: 178px;
         overflow-y: auto;
+        &.hasH3 {
+            padding-top: 23px;
+        }
+
 
     }
 }
@@ -72,6 +76,22 @@
         font-weight: bold;
         background: svg-load('./checkmark.svg') $very_light_blue no-repeat;
         background-position:  calc(100% - 10px);
+    }
+}
+:global(.rich-text) .topicHeading {
+    background-image: linear-gradient($very_light_blue, $very_light_blue 80%, rgba(255,255,255,0));
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    padding: 0.5em 0 0.5em 26px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    color: $medium_blue;
+    letter-spacing: 0.25px;
+
+    &::after {
+        content: ':';
     }
 }
 :global(.rich-text) :global(.has-children) .facetItem, :global(.has-children) .facetItem {
