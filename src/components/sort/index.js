@@ -19,6 +19,17 @@ export default class Sort extends Element {
         button.value = this.data.field;
         return button;
     }
+    set isDisabled(bool){
+        this._isDisabled = bool;
+        if ( bool ){
+            this.el.classList.add(s.isDisabled);
+        } else {
+            this.el.classList.remove(s.isDisabled);
+        }
+    }
+    get isDisabled(){
+        return this._isDisabled;
+    }
     set isActive(bool){
         this._isActive = bool;
         if ( bool ) {
@@ -49,46 +60,34 @@ export default class Sort extends Element {
     init(){
         var _this = this;
         this.isAscending = true;
+        this.isDisabled = false;
         this.el.addEventListener('click', function(){
             _this.clickHandler.call(_this, this.value);
         });
+       /* Object.defineProperty(this, 'isDisabled', { // IE11 is tripping up on writing a property to `this`; says isDisabled is read-only. it may be something to do withthe
+                                                    // Nodelist.prototype.forEach polyfill
+            value: false,
+            writable: true
+        });*/
+
        PS.setSubs([
-              ['listIDs', this.toggleSorters.bind(this)]
+              ['listIDs', this.toggleSorter.bind(this)]
          ]);
         /* to do*/
 
         //subscribe to secondary dimension , drilldown, details
     }
-    toggleSorters(msg, data){
+    // TO DO: sorts are Components and should have direct response to listIDs message
+    toggleSorter(){
         console.log(this.model.tally);
-        ['category', 'state', 'topic', 'year'].forEach(type => {
-            var sort = document.querySelector('#sort-' + type);
-            if ( this.model.tally[type].size < 2 ) {
-                sort.isDisabled = true;
-                sort.classList.add(s.isDisabled);
-            } else {
-                sort.isDisabled = false;
-                sort.classList.remove(s.isDisabled);
-            }
-
-        });
-        var lawSort = document.querySelector('#sort-name');
-        if ( data.length < 2 ) {
-            lawSort.isDisabled = true;
-            lawSort.classList.add(s.isDisabled);
+        var type = this.data.field;
+        if ( this.model.tally[type].size < 2 ) {
+            this.isDisabled = true;
         } else {
-            lawSort.isDisabled = false;
-            lawSort.classList.remove(s.isDisabled);
+            this.isDisabled = false;
         }
     }
-/*        PS.setSubs([
-            ['selectHIA', this.activate.bind(this)]
-        ]);*/
-        /* to do*/
-
-        //subscribe to secondary dimension , drilldown, details
-    
-    clickHandler(value){
+   clickHandler(value){
         if ( this.isDisabled ){
             return;
         }

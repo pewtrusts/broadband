@@ -265,6 +265,7 @@ export default class Broadband extends PCTApp {
             this.model.tally.topic = new Set(this.model.filteredData.map(d => d.topic));
             this.model.tally.year = new Set(this.model.filteredData.map(d => d.year));
             this.model.tally.category = new Set(this.model.filteredData.map(d => this.model.topicToCategory[d.topic]));
+            this.model.tally.name = new Set(this.listIDs);
             S.setState('listIDs', this.listIDs);
         } 
     }
