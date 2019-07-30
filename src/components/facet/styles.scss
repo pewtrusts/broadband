@@ -82,20 +82,20 @@
         background-position:  calc(100% - 10px);
     }
 }
-:global(.rich-text) .topicHeading {
-    background-image: linear-gradient($very_light_blue, $very_light_blue 80%, rgba(255,255,255,0));
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 0;
-    padding: 0.5em 0 0.5em 26px;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    color: $medium_blue;
-    letter-spacing: 0.25px;
+.topicHeading {
+    background-image: linear-gradient($very_light_blue, $very_light_blue 80%, rgba(255,255,255,0)) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0 !important;
+    padding: 0.5em 0 0.5em 26px !important;
+    position: absolute !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    color: $medium_blue !important;
+    letter-spacing: 0.25px !important;
 
     &::after {
-        content: ':';
+        content: ':' !important;
     }
 }
 :global(.rich-text) :global(.has-children) .facetItem, :global(.has-children) .facetItem {
