@@ -43,7 +43,6 @@ export default class SortControls extends Element {
             S.setState('showGlossary', !currentState);
         });
        PS.setSubs([
-             ['showGlossary', this.toggle.bind(this)]
          ]);
         /* to do*/
 

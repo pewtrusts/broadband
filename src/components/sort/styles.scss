@@ -45,4 +45,7 @@
         //border-bottom: 2px solid $medium_blue;
 
     }
+    &.isDisabled {
+        opacity: 0.5;
+    }
 }

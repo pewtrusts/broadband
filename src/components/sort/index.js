@@ -1,6 +1,6 @@
 import Element from '@UI/element';
 import s from './styles.scss';
-//import PS from 'pubsub-setter';
+import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 import { GTMPush } from '@Utils';
 
@@ -52,14 +52,46 @@ export default class Sort extends Element {
         this.el.addEventListener('click', function(){
             _this.clickHandler.call(_this, this.value);
         });
+       PS.setSubs([
+              ['listIDs', this.toggleSorters.bind(this)]
+         ]);
+        /* to do*/
+
+        //subscribe to secondary dimension , drilldown, details
+    }
+    toggleSorters(msg, data){
+        console.log(this.model.tally);
+        ['category', 'state', 'topic', 'year'].forEach(type => {
+            var sort = document.querySelector('#sort-' + type);
+            if ( this.model.tally[type].size < 2 ) {
+                sort.isDisabled = true;
+                sort.classList.add(s.isDisabled);
+            } else {
+                sort.isDisabled = false;
+                sort.classList.remove(s.isDisabled);
+            }
+
+        });
+        var lawSort = document.querySelector('#sort-name');
+        if ( data.length < 2 ) {
+            lawSort.isDisabled = true;
+            lawSort.classList.add(s.isDisabled);
+        } else {
+            lawSort.isDisabled = false;
+            lawSort.classList.remove(s.isDisabled);
+        }
+    }
 /*        PS.setSubs([
             ['selectHIA', this.activate.bind(this)]
         ]);*/
         /* to do*/
 
         //subscribe to secondary dimension , drilldown, details
-    }
+    
     clickHandler(value){
+        if ( this.isDisabled ){
+            return;
+        }
         function setState(){
             S.setState('sort', [( this.isAscending ? 'ascending' : 'descending' ), value]);
             GTMPush(`Broadband|Sort|${value}|${this.isAscending ? 'ascending' : 'descending'}`);

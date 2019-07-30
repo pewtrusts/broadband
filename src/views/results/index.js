@@ -28,7 +28,7 @@ export default class Results extends Element {
         return view;
     }
     init(){
-
+       
         //subscribe to secondary dimension , drilldown, details
     }
     

@@ -244,6 +244,7 @@ export default class Broadband extends PCTApp {
         }
     }
     filterData(msg,data){
+        this.model.tally = {};
         if ( msg ){ // user triggers to filter data will include a msg; data will be null to undo a filter or a string to perform a filter; when initializing, the msg will be null
             let toArray = msg.split('.');
             let key = toArray[1];
@@ -260,6 +261,10 @@ export default class Broadband extends PCTApp {
         this.listIDs = this.model.filteredData.map(d => 'list-item-' + d.id);
         if ( msg ) {
             this.updateCounts();
+            this.model.tally.state = new Set(this.model.filteredData.map(d => d.state));
+            this.model.tally.topic = new Set(this.model.filteredData.map(d => d.topic));
+            this.model.tally.year = new Set(this.model.filteredData.map(d => d.year));
+            this.model.tally.category = new Set(this.model.filteredData.map(d => this.model.topicToCategory[d.topic]));
             S.setState('listIDs', this.listIDs);
         } 
     }
