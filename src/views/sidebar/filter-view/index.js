@@ -4,7 +4,7 @@ import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 import { Button } from '@UI/buttons/buttons.js';
-//import { GTMPush } from '@Utils';
+import { GTMPush } from '@Utils';
 
 
 class ClearAll extends Button {
@@ -46,6 +46,7 @@ class ClearAll extends Button {
     clickHandler(){
         this.app.listView.showChurning.call(this.app.listView, true);
         S.setState('clearAll', true);
+        GTMPush('Broadband|Filter|ClearAll');
     }
 }
 

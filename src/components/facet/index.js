@@ -182,7 +182,6 @@ export default class Facet extends Element {
                 facet.isSelected = false;
                 facet.classList.remove(s.isSelected);
                 S.setState('filter.' + facet.dataset.type, null);
-                GTMPush('Broadband|Filter|ClearAll');
             });
             this.isOpen = false;
         }
