@@ -1,4 +1,1 @@
-<svg width="23px" height="30px" viewBox="0 0 23 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <path d="M0,1 L20,28" stroke-width="1"></path>
-    <path d="M-3,4 L24,24" stroke-width="1" transform="translate(10.500000, 14.000000) rotate(-90.000000) translate(-10.500000, -14.000000) "></path>
-</svg>
+<svg viewBox="0 0 16 14" width="16" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M8 7l-6.6 6.6L8 7 1.4.4 8 7zm0 0L14.7.3 8 7l6.6 6.6L8 7z" stroke-linecap="round" stroke-linejoin="round" stroke="#000"></path></svg>
