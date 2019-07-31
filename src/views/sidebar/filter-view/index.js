@@ -71,25 +71,34 @@ export default class FilterView extends Element {
         }
         view.classList.add(s.filterView);
         
+        var topDiv = document.createElement('div');
+        topDiv.classList.add(s.topDiv);
+
+
         //show n of x
         var showing = document.createElement('p');
         var total = this.model.data.length;
         showing.classList.add('js-showing-n-of-x', s.showing);
         showing.innerHTML = `Showing <span class="js-showing-n">${total}</span> of ${total}`;
-        view.appendChild(showing);
+        //view.appendChild(showing);
 
         //heading
         var heading = document.createElement('h2');
         heading.classList.add(s.filterHeading);
         heading.textContent = 'Filter results';
-        view.appendChild(heading);
+       // view.appendChild(heading);
 
         //button container
         var btnContainer = document.createElement('div');
         btnContainer.classList.add('js-button-container');
         btnContainer.classList.add(s.btnContainer);
-        view.appendChild(btnContainer);
+ //       view.appendChild(btnContainer);
 
+        topDiv.appendChild(showing);
+        topDiv.appendChild(heading);
+        topDiv.appendChild(btnContainer);
+
+        view.appendChild(topDiv);
 
         // state group
         var stateGroup = document.createElement('div');

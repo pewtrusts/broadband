@@ -16,6 +16,7 @@
    position: relative;
      h2.filterHeading {
         font-size: 1.2em;
+        margin-top: 7px;
     }
     @media screen and (max-width: 910px){
         width: 600px;
@@ -27,7 +28,7 @@
 
 .btnContainer {
     position: absolute;
-    top: 3px;
+    top: 7px;
     right: 0;
 }
 :global(#pew-app) .clearAll {
@@ -39,4 +40,15 @@
 }
 .showing {
     margin-bottom: 0;
+}
+.topDiv {
+    position: sticky;
+    top: 100px;
+    z-index: 2;
+    background-image: linear-gradient(#fff, #fff 80%, rgba(255,255,255,0));
+padding-top: 8px;
+    padding-bottom: 10px;
+     @media screen and (max-width: 910px){
+        position: static;
+     }
 }

@@ -7,16 +7,8 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    position: sticky;
-    top: 105px;
-    max-height: calc(100vh - 115px);
-    overflow-y: auto;
     padding-top: 0px;
-    @media screen and (max-height: 775px), (-ms-high-contrast: active), (-ms-high-contrast: none) {
-        position: static;
-        max-height: 100%;
-        overflow-y: visible;
-    }
+   
     @media screen and (max-width: 910px){
         width: 100%;
         max-width: 100%;
