@@ -118,6 +118,7 @@ export default class Facet extends Element {
         ]);
         this.isOpen = false;
         this.facetHeading = this.el.querySelector('.js-facet-heading');
+        this.allFacetHeadings = document.querySelectorAll('.js-facet-heading');
         this.facetItems = this.el.querySelectorAll('.js-facet-item'); // these are rendered and initialized in component/facet
         this.definitionButtons = this.el.querySelectorAll('.js-definition-button');
        // var _this = this;
@@ -160,6 +161,11 @@ export default class Facet extends Element {
             if ( this.isEmpty ) {
                 return;
             }
+            this.parent.topicFacets.forEach(facet => {
+                if ( facet !== this && this.data.key !== 'state' && this.data.key !== 'year' ){
+                    facet.isOpen = false;
+                }
+            });
             this.isOpen = !this.isOpen;
         });
         tippy(this.definitionButtons);
