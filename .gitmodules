@@ -4,9 +4,11 @@
 [submodule "submodules/UI-js"]
 	path = submodules/UI-js
 	url = git@github.com:pewtrusts/UI-js.git
+	branch = v4
 [submodule "submodules/PCTApp-js"]
 	path = submodules/PCTApp-js
 	url = git@github.com:pewtrusts/PCTApp-js.git
+	branch = v3
 [submodule "submodules/ROUTR"]
 	path = submodules/ROUTR
 	url = git@github.com:pewtrusts/ROUTR.git

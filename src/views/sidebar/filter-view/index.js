@@ -1,5 +1,5 @@
 import Element from '@UI/element';
-import Facet from '@Project/components/facet';
+import Facet from '@UI/filter-facet';
 import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
