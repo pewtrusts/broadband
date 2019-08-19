@@ -10,3 +10,6 @@
 [submodule "submodules/ROUTR"]
 	path = submodules/ROUTR
 	url = git@github.com:pewtrusts/ROUTR.git
+[submodule "submodules/UI-svelte"]
+	path = submodules/UI-svelte
+	url = git@github.com:pewtrusts/UI-svelte.git
