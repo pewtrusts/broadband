@@ -99,6 +99,11 @@
         "definition": "Addresses provision of broadband by political subdivisions",
         "order": 0
     },
+    "Net neutrality": {
+        "category": "competition",
+        "definition": "Addresses requirements for internet service providers to operate according to the principles of net neutrality.",
+        "order": 4
+    },
     "Cooperatives": {
         "category": "competition",
         "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)",
