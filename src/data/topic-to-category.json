@@ -64,10 +64,6 @@
         "definition": "",
         "order": 0
     },
-    "As defined by FCC or U.S. Code": {
-        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition as defined by the FCC or as in US Code",
-        "order": 3
-    },
     "Speed of 1.5 Mbps or less": {
         "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at speeds of less than 1.5 Mbps",
         "order": 0
@@ -80,9 +76,17 @@
         "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition at 25 Mbps / 3 Mbps",
         "order": 2
     },
+    "Other speed": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) according to a speed not listed above",
+        "order": 3
+    },
+    "As defined by FCC or U.S. Code": {
+        "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - definition as defined by the FCC or as in US Code",
+        "order": 4
+    },
     "Defined by technology, not speed": {
         "definition": "Defines broadband or an equivalent term (e.g., broadband network, high speed internet) - defined as technology that provides high-speed access to the internet (no speed or FCC specification)",
-        "order": 4
+        "order": 5
     },
     "Definition - Unserved": {
         "category": "definition",
@@ -99,11 +103,6 @@
         "definition": "Addresses provision of broadband by political subdivisions",
         "order": 0
     },
-    "Net neutrality": {
-        "category": "competition",
-        "definition": "Addresses requirements for internet service providers to operate according to the principles of net neutrality.",
-        "order": 4
-    },
     "Cooperatives": {
         "category": "competition",
         "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)",
@@ -118,6 +117,11 @@
         "category": "competition",
         "definition": "Addresses other elements of service provision not specified above, such as access for multiple tenant environment or multiple dwelling unit buildings",
         "order": 3
+    },
+    "Net neutrality": {
+        "category": "competition",
+        "definition": "Addresses requirements for internet service providers to operate according to the principles of net neutrality.",
+        "order": 4
     },
     "Pole attachments": {
         "category": "infrastructure",
