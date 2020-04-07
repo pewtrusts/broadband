@@ -31,12 +31,12 @@ export default class ListView extends Element {
                 <p class=${s.category}><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
                 <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
-              <p>${cur.description.replace(/¶/g,'</p><p>')}</p>
+              <p>${cur.description.replace(/&para;/g,'</p><p>')}</p>
               <button aria-expanded="false" aria-label="Reveal relevant language from state code" role="button" class="js-relevant-button ${s.relevantButton}">read relevant code</button>
               <div id="relevent-code" class="js-relevant-text ${s.relevantText}">
                 <h3>State Code</h3>
                 <button aria-label="Close text box with relevant language from state code" class="js-close-relevant ${s.closeRelevant}"></button>
-                <p>${cur.relevant_text.replace(/¶/g,'</p><p>')}</p>
+                <p>${cur.relevant_text.replace(/&para;/g,'</p><p>')}</p>
               </div>
             </div>
           `;
