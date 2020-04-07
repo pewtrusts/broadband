@@ -3,7 +3,29 @@ import s from './styles.scss';
 import PS from 'pubsub-setter';
 import { stateModule as S } from 'stateful-dead';
 import { GTMPush } from '@Utils';
+import sanitizeHTML from 'sanitize-html';
 
+const sanitizeOptions = {
+  // slightly edited defaults
+  allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'ul', 'ol',
+    'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+    'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre'], // removed <a> and <iframe>
+  disallowedTagsMode: 'discard',
+  allowedAttributes: {
+    a: [ 'href', 'name', 'target' ],
+    // We don't currently allow img itself by default, but this
+    // would make sense if we did. You could add srcset here,
+    // and if you do the URL is checked for safety
+    img: [ 'src' ]
+  },
+  // Lots of these won't come up by default because we don't allow them
+  selfClosing: [ 'img', 'br', 'hr', 'area', 'base', 'basefont', 'input', 'link', 'meta' ],
+  // URL schemes we permit
+  allowedSchemes: [ 'http', 'https', 'ftp', 'mailto' ],
+  allowedSchemesByTag: {},
+  allowedSchemesAppliedToAttributes: [ 'href', 'src', 'cite' ],
+  allowProtocolRelative: false // changed to false
+};
 
 export default class ListView extends Element {
 
@@ -20,6 +42,14 @@ export default class ListView extends Element {
         view.innerHTML = this.renderList();
         return view;
     }
+    sanitize(html){
+      var sanitized = sanitizeHTML(html.replace(/&para;/g,'</p><p>'), sanitizeOptions);
+      if ( sanitized.match(/^<\w+[^>]*>/) ){ // if supplied text starts with an html tag
+        return sanitized;
+      } else { //ie just text , not supplied as html
+        return '<p>' + sanitized + '</p>';
+      }
+    }
     renderList(){
       return this.model.data.reduce((acc, cur) => {
             var section = `
@@ -31,12 +61,12 @@ export default class ListView extends Element {
                 <p class=${s.category}><strong>Category:</strong> ${this.model.dictionary[cur.category]}</p>
                 <p class=${s.topic}><strong>Topic:</strong> ${cur.topic}${ cur.subtopic ? ' (' + cur.subtopic + ')' : ''}</p>
               </div>
-              <p>${cur.description.replace(/&para;/g,'</p><p>')}</p>
+              ${this.sanitize(cur.description)}
               <button aria-expanded="false" aria-label="Reveal relevant language from state code" role="button" class="js-relevant-button ${s.relevantButton}">read relevant code</button>
               <div id="relevent-code" class="js-relevant-text ${s.relevantText}">
                 <h3>State Code</h3>
                 <button aria-label="Close text box with relevant language from state code" class="js-close-relevant ${s.closeRelevant}"></button>
-                <p>${cur.relevant_text.replace(/&para;/g,'</p><p>')}</p>
+                ${this.sanitize(cur.relevant_text)}
               </div>
             </div>
           `;
