@@ -39,25 +39,30 @@
         "definition": "Establishes a fund for the purpose of expanding broadband infrastructure",
         "order": 0
     },
+    "Fund - Broadband": {
+        "category": "funding",
+        "definition": "Establishes a fund for the purpose of expanding broadband infrastructure",
+        "order": 1
+    },
     "Fund - Other": {
         "category": "funding",
         "definition": "Establishes a fund for another purpose that can be used to support expansion of broadband infrastructure",
-        "order": 1
+        "order": 2
     },
     "State USF": {
         "category": "funding",
         "definition": "Addresses use of state universal service funds or state high cost support mechanisms to support broadband infrastructure or access. ",
-        "order": 2
+        "order": 3
     },
     "Tax incentives": {
         "category": "funding",
         "definition": "Establishes a tax incentive for broadband infrastructure, equipment, or service provision",
-        "order": 3
+        "order": 4
     },
     "Financing - Other": {
         "category": "funding",
         "definition": "Establishes another type of funding or financing mechanism (including authorizing political subdivision to fund or finance broadband)",
-        "order": 4
+        "order": 5
     },
     "Definition - Broadband": {
         "category": "definition",
