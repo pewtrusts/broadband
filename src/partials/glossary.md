@@ -1,6 +1,6 @@
 ### Glossary
 
-State policies create a framework for broadband deployment that lays out who can provide broadband, how they can provide it, and how expansion efforts are regulated and incentivized. The tool provides information on five categories that affect broadband deployment: state broadband programs, definitions, funding and financing, competition and regulation, and infrastructure access.
+State policies create a framework for broadband deployment that lays out who can provide broadband, how they can provide it, and how expansion efforts are regulated and incentivized. The tool provides information on five categories that affect broadband deployment: state broadband programs, definitions, funding and financing, competition and regulation, and infrastructure access. Each law in the tool is labeled with one of these categories, as well as a topic that describes the law in more detail. In cases where one law belongs to multiple topics, the topic is also listed in parentheses after the name in order to differentiate between the two entries.
 
 **Broadband programs:** States structure their broadband programs in different ways. In some states, a centralized office coordinates these programs, while in others the responsibility is held by one or more departments or agencies, such as a department of economic development or department of commerce. States have also formed broadband commissions and task forces to address connectivity challenges.
 
