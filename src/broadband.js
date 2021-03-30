@@ -62,6 +62,7 @@ function getRuntimeData() {
                 addCategories(results.data);
                 resolveWrapper(results.data);
             },
+            delimiter: ',',
             download: true,
             error: function(error, file) {
                 rejectWrapper({ error, file });

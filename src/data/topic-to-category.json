@@ -4,7 +4,7 @@
         "definition": "Establishes broadband office; defines authority or responsibility of broadband office",
         "order": 0
     },
-    "Task force": {
+    "Task Force": {
         "category": "programmatic",
         "definition": "Establishes a broadband task force or advisory committee; defines authority or responsibility of the task force or advisory committee",
         "order": 1
@@ -54,7 +54,7 @@
         "definition": "Addresses use of state universal service funds or state high cost support mechanisms to support broadband infrastructure or access. ",
         "order": 3
     },
-    "Tax incentives": {
+    "Tax Incentives": {
         "category": "funding",
         "definition": "Establishes a tax incentive for broadband infrastructure, equipment, or service provision",
         "order": 4
@@ -103,7 +103,7 @@
         "definition": "Defines an underserved area",
         "order": 2
     },
-    "Municipal broadband": {
+    "Municipal Broadband": {
         "category": "competition",
         "definition": "Addresses provision of broadband by political subdivisions",
         "order": 0
@@ -113,17 +113,17 @@
         "definition": "Addresses provision of broadband by electric or telephone cooperatives (also called electric or telephone corporations in some states)",
         "order": 1
     },
-    "Regulatory authority": {
+    "Regulatory Authority": {
         "category": "competition",
         "definition": "Addresses jurisdiction of the Public Utilities Commission or equivalent agency to address broadband infrastructure or internet access services",
         "order": 2
     },
-    "Service provision (SP) - Other": {
+    "Service Provision - Other": {
         "category": "competition",
         "definition": "Addresses other elements of service provision not specified above, such as access for multiple tenant environment or multiple dwelling unit buildings",
         "order": 3
     },
-    "Net neutrality": {
+    "Net Neutrality": {
         "category": "competition",
         "definition": "Addresses requirements for internet service providers to operate according to the principles of net neutrality.",
         "order": 4
@@ -138,7 +138,7 @@
         "definition": "Addresses permitting for broadband infrastructure, wireless facilities, or small cell facilities either by state agencies or political subdivisions",
         "order": 1
     },
-    "Right of way": {
+    "Rights-of-way": {
         "category": "infrastructure",
         "definition": "",
         "order": 3
@@ -175,7 +175,7 @@
         "definition": "Addresses other elements of infrastructure access not specified above, such as microtrenching.",
         "order": 7
     },
-    "Legislative intent": {
+    "Legislative Intent": {
         "category": "other",
         "definition": "Defines legislative intent or purpose related to broadband provisions in statute",
         "order": 0
